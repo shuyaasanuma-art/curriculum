@@ -12,7 +12,6 @@ class LikesTableSeeder extends Seeder
     public function run()
     {
         DB::table('likes')->insert([
-            'user_id'=>1,
             'post_id'=>1,
             'created_at'=>Carbon::now(),
             'updated_at'=>Carbon::now(),

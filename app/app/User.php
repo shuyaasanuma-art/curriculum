@@ -37,9 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function spot(){
-        return $this->hasMany('App\Spot');
-    }
     public function post(){
         return $this->hasMany('App\Post');
     }

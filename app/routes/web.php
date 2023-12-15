@@ -1,6 +1,5 @@
 <?php
-use App\Http\Controllers\DisplayController;
-use App\Http\Controllers\RegistrationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +14,11 @@ use App\Http\Controllers\RegistrationController;
 Route::get('/', function () {
     return view('layouts.layout');
 });
-// Route::get('/',[DisplayController::class,'index']);
+Auth::routes();
+Route::resources([
+    'users'=>'UserController',
+    'posts'=>'PostController',
+    'spots'=>'SpotController',
+    'likes'=>'LikeController',
+    'follows'=>'FollowController',
+]);

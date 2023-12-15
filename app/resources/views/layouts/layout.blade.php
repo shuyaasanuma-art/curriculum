@@ -21,38 +21,44 @@
     @yield('stylesheet')
 </head>
 <body>
-    <!-- <nav class="navbar fixed-top navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand">ロゴ</a>
-        <span class="navbar-text">
-            アイコン
-        </span>    
-        <div class="navbar my-2 my-lg-0 ">
-            <a class="navbar-brand" href="#">Fixed top</a>
-        </div>
-    </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+    <nav class="navbar fixed-top navbar-light " style="background-color: #e3f2fd;">
+        <div class="d-flex justify-content-between">
+            <a class="navbar-brand">ロゴ</a>
+            <span class="navbar-item">
+                アイコン
+            </span>
+            <a class="navbar-item" href="#">ログアウト</a>
         </div>
     </nav>
+     <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    家計簿
+                </a>
+            </div>
+            <div class="my-navbar-control">
+                @if(Auth::check())
+                    <span class="my-navbar-item">{{ Auth::user()->name }}</span>
+                    /
+                    <a href="{{ route('login')}}" id="logout" class="my-navbar-item">ログアウト</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                       @csrf
+                    </form>
+                    <script>
+                        document.getElementById('logout').addEventListener('click',function(event) {
+                       　　　event.preventDefault();
+                       　　　document.getElementById('logout-form').submit();    
+                       });
+                    </script>
+                @else
+                    <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+                    /
+                    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+                @endif
+            </div>
+        </nav>
+        @yield('content')
+    </div>
 </body>
 </html>

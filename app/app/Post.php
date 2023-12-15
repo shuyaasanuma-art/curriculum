@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $fillable = ['spot_id','title','date','image','episode','evolution'];
 
-    public function spot(){
-        return $this->belongsTo('App\Post');
+    public function like(){
+        return $this->belongsTo('App\Like');
     }
 }

@@ -12,7 +12,6 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         DB::table('posts')->insert([
-            'user_id'=>1,
             'spot_id'=>1,
             'title'=>'サンプル１',
             'date'=>'2023-12-14',
