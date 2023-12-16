@@ -11,14 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.layout');
-});
+// Route::get('/', function () {
+//     return view('layouts.layout');
+// });
 Auth::routes();
-Route::resources([
+Route::group(['middleware'=>'auth'],function(){
+    Route::resources([
     'users'=>'UserController',
     'posts'=>'PostController',
     'spots'=>'SpotController',
     'likes'=>'LikeController',
     'follows'=>'FollowController',
-]);
+    ]);
+});
