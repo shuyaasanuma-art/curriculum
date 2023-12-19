@@ -74,7 +74,10 @@ class SpotController extends Controller
      */
     public function edit($id)
     {
-        //
+        $spots = Spot::find($id);
+        return view('post_edit',[
+            'spots'=>$spots,
+        ]);
     }
 
     /**
@@ -86,7 +89,13 @@ class SpotController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $instance = new Spot;
+        $spots = $instance->find($id);
+        $columns = ['name','address','longitude','atitude'];
+        foreach($columns as $column){
+            $spots->$column=$request->$column;
+        }
+        $spots->save();
     }
 
     /**
@@ -97,6 +106,8 @@ class SpotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $spots = Spot::find($id);
+        $spots -> delete();
+        return redirect('my_post');
     }
 }

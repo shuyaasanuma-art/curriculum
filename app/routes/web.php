@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,11 +11,12 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('layouts.layout');
-// });
+Route::get('/', function () {
+    return view('main');
+});
+Route::get('/',[PostController::class,'index']);
 Auth::routes();
-Route::group(['middleware'=>'auth'],function(){
+// Route::group(['middleware'=>'auth'],function(){
     Route::resources([
     'users'=>'UserController',
     'posts'=>'PostController',
@@ -23,4 +24,4 @@ Route::group(['middleware'=>'auth'],function(){
     'likes'=>'LikeController',
     'follows'=>'FollowController',
     ]);
-});
+// });

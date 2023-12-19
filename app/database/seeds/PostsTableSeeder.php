@@ -13,13 +13,14 @@ class PostsTableSeeder extends Seeder
     {
         DB::table('posts')->insert([
             'spot_id'=>1,
+            'user_id'=>1,
             'title'=>'サンプル１',
             'date'=>'2023-12-14',
             'image'=>'rei',
             'episode'=>'sample1',
             'evolution'=>3,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'created_at' => NULL,
+            'updated_at' => NULL,
         ]);
     }
 }

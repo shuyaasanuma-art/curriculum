@@ -16,8 +16,8 @@ class PostController extends Controller
     public function index()
     {
         $posting = new Post;
-        $posts = $posting->where('del_flg',0)->get();
-        return view('main',[
+        $posts = $posting->with('user')->first();
+        return view('layouts.layout_post',[
             'posts'=>$posts,
         ]);
     }

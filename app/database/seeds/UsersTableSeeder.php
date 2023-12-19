@@ -15,11 +15,10 @@ class UsersTableSeeder extends Seeder
             'name'=>'サンプル１',
             'email'=>'test@email.com',
             'password'=>'サンプル１',
-            'image'=>'rei',
             'profile'=>'サンプル１',
             'role'=>1,
-            'created_at'=>Carbon::now(),
-            'updated_at'=>Carbon::now(),
+            'created_at'=>Null,
+            'updated_at'=>Null,
         ]);
     }
 }

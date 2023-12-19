@@ -22,14 +22,33 @@
 </head>
 <body>
     <nav class="navbar fixed-top navbar-light " style="background-color: #e3f2fd;">
-    <!-- @if(Auth::check()) -->
         <a class="navbar-brand">ロゴ</a>
-        <div class="d-flex justify-content-around">
+        <div class="my-navbar-control">
+                @if(Auth::check())
+                    <span class="my-navbar-item">{{ Auth::user()->image }}</span>
+                    /
+                    <a href="{{ route('login')}}" id="logout" class="my-navbar-item">ログアウト</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                       @csrf
+                    </form>
+                    <script>
+                       document.getElementById('logout').addEventListener('click',function(event) {
+                       　　　event.preventDefault();
+                       　　　document.getElementById('logout-form').submit();    
+                       });
+                    </script>
+                @else
+                    <!-- <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+                    /
+                    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a> -->
+                @endif
+            </div>
+        <!-- <div class="d-flex justify-content-around">
             <span class="navbar-item">
                 アイコン
             </span>
             <a class="navbar-item" href="#">ログアウト</a>
-        </div>
+        </div> -->
     </nav>
 </body>
 </html>

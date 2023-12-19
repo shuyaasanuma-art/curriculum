@@ -16,8 +16,8 @@ class SpotsTableSeeder extends Seeder
             'address'=>'サンプル１',
             'longitude'=>'100',
             'atitude'=>'100',
-            'created_at'=>Carbon::now(),
-            'updated_at'=>Carbon::now(),
+            'created_at'=>NULL,
+            'updated_at'=>NULL,
         ]);
     }
 }
