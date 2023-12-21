@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extend('layouts.layout')
 
 <body>
 <div>
@@ -15,9 +15,24 @@
 
     </div>
 </div>
-@extends('layouts.layout_post')
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
+<div class="container">
+    <div class="row">
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+    </div>
+</div>
+<br>
+<div class="container">
+ <nav aria-label="Page navigation example" >
+  <ul class="pagination row justify-content-center">
     <li class="page-item">
       <a class="page-link" href="#!" aria-label="Previous">
         <span aria-hidden="true">«</span>
@@ -34,5 +49,6 @@
       </a>
     </li>
   </ul>
-</nav>
+ </nav>
+</div>
 </body>

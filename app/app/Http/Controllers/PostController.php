@@ -16,8 +16,9 @@ class PostController extends Controller
     public function index()
     {
         $posting = new Post;
-        $posts = $posting->with('user')->first();
-        return view('layouts.layout_post',[
+        // $posts = $posting->orderby('created_at','DESC')->paginate(6);
+        $posts = $posting->first();
+        return view('main',[
             'posts'=>$posts,
         ]);
     }
@@ -66,7 +67,7 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
-        return view('post_detail',[
+        return view('main',[
             'posts'=>$posts,
         ]);
     }

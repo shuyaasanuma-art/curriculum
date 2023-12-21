@@ -1,0 +1,33 @@
+@extends('layouts.layout_post')
+<div>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <div>スポット情報</div>
+                </div>
+                <div>
+                    <div>名称：</div>
+                    <div>〇〇スキー場</div>
+                </div>
+                <div>
+                    <div>所在地</div>
+                    <div></div>
+                </div>   
+            </div>
+            <div><map name=""></map></div>
+        </div> 
+        <div>
+            <div>
+                <div>タイトル</div>
+                <div>評価</div>
+                <div>コメント</div>
+            </div>
+            <div>画像</div>
+        </div>
+    </div>
+    <div>
+        <button>編集画面に戻る</button>
+        <button>投稿する</button>
+    </div>
+</div>

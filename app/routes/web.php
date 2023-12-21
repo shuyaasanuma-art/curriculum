@@ -11,17 +11,14 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+// Route::get('/', function () {
+//     return view('main');
+// });
 Route::get('/',[PostController::class,'index']);
 Auth::routes();
 // Route::group(['middleware'=>'auth'],function(){
     Route::resources([
-    'users'=>'UserController',
     'posts'=>'PostController',
     'spots'=>'SpotController',
-    'likes'=>'LikeController',
-    'follows'=>'FollowController',
     ]);
 // });

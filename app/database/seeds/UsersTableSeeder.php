@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
             'name'=>'サンプル１',
             'email'=>'test@email.com',
             'password'=>'サンプル１',
+            'image'=>'200',
             'profile'=>'サンプル１',
             'role'=>1,
             'created_at'=>Null,
