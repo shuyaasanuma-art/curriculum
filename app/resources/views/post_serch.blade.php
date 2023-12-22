@@ -7,17 +7,32 @@
    <br>
    <br>
     <div class="container">
-        <div class="row justify-content-between">
-            <input class="btn btn-primary btn-lg col">投稿検索</button>
+      <form action="{{ route('posts.serch')}}" method="get">
+        <div class="row justify-content-around">
+            <input class="btn btn-lg col" value="投稿検索ワード入力">
             <div class="col"></div>
-            <button type="button" class="btn btn-primary btn-lg col">探す</button>
+            <button type="submit" class="btn btn-primary btn-lg col">探す</button>
         </div>
-
+      </form>
     </div>
 </div>
-@extends('layouts.layout_post')
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
+<div class="container">
+    <div class="row">
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+    </div>
+</div>
+<div class="container">
+ <nav aria-label="Page navigation example">
+  <ul class="pagination row justify-content-center">
     <li class="page-item">
       <a class="page-link" href="#!" aria-label="Previous">
         <span aria-hidden="true">«</span>
@@ -34,5 +49,6 @@
       </a>
     </li>
   </ul>
-</nav>
+ </nav>
+</div>
 </body>

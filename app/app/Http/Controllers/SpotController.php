@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Spot;
+
 class SpotController extends Controller
 {
     /**
@@ -27,7 +29,8 @@ class SpotController extends Controller
      */
     public function create()
     {
-        $spots = Spot::where('del_flg',0)->get();
+        $spoting = new Spot;
+        $spots = $spoting->get();
         return view('post_spot',[
             'spots'=>$spots,
         ]);

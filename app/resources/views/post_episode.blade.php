@@ -1,4 +1,4 @@
-@extends('layouts.layout_post')
+@extends('layouts.layout')
 <div>
     <div>
         <div>

@@ -67,7 +67,7 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
-        return view('main',[
+        return view('post_deteil',[
             'posts'=>$posts,
         ]);
     }

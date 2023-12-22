@@ -1,31 +1,51 @@
 @extends('layouts.layout')
+<br>
+<br>
+<br>
+
 <div class="container container-m">
-    <div>
-        <div class="">
-            <div>
-                <div >
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="row">
                     <div>アイコン画像</div>
                     <h4>フォロー</h4>
                     <h4>フォロワー</h4>
                 </div>
                 <div>
-                    <div>ユーザー名</div>
-                    <div>プロフィール</div>
+                    <div>{{ $users->name }}</div>
+                    <div>{{ $users->profile }}</div>
                 </div>
             </div>
-            <div>
-                <div>新規投稿</div>
-                <div>ユーザー情報編集</div>
+            <div class="col">
+                <a href="{{ route('posts.spot')}}">
+                    <button type="button" class="btn btn-sm">新規投稿</button>
+                </a>
+                <br>
+                <a href="">
+                    <button type="button" class="btn btn-sm">ユーザー情報編集</button>
+                </a>               
             </div>
         </div>
-        <div>
-            <div>自分の投稿一覧</div>
-            <div>いいねした投稿一覧</div>
+        
+    </div>
+    <div class="container">
+        <div class="row">
+            <button class="col btn btn-lg">自分の投稿一覧</button>
+            <div class="col"></div>
+            <button class="col btn btn-lg">いいねした投稿一覧</button>
         </div>
     </div>
-    @extends('layouts.layout_post')
+    <div class="container">
+       <div class="row">
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+        <div class="col-4">@include('layouts.layout_post')</div>
+       </div>
+    </div>
+    <br>
     <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination justify-content-center">
     <li class="page-item">
       <a class="page-link" href="#!" aria-label="Previous">
         <span aria-hidden="true">«</span>

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+use App\Post;
+use App\Follow;
+
 class UserController extends Controller
 {
     /**
@@ -13,7 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = new User;
+        $users = $user->with('follow')->first();
+        $posting = new Post;
+        $posts = $posting->first();
+        return view('mypage',[
+            'users'=>$users,
+            'posts'=>$posts,
+        ]);
     }
 
     /**
