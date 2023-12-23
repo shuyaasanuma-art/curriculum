@@ -15,11 +15,7 @@
        </div>
     </div>
     <div class="container">
-        <iframe
-         width="800"
-         height="600"
-         src="https://maps.google.co.jp/maps?output=embed&q=東京" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+        
         <iframe width="800" height="600" src="//www.google.com/maps/embed/v1/search?key=AIzaSyDLuIsMeevGk54UbK14LYapRfREb4jYppE&center=35.7943492,139.7925433&zoom=16&q=%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3"></iframe>
     </div>
 
