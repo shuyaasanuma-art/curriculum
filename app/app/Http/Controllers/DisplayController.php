@@ -19,4 +19,7 @@ class DisplayController extends Controller
     public function PostSpot(){
         return view('post_spot');
     }
+    public function GetMap(){
+        return view('post_spot');
+    }
 }

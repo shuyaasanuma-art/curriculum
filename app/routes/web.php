@@ -19,7 +19,7 @@ Route::get('/',[PostController::class,'index']);
 // //投稿検索
 Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
 Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
-
+Route::get('/get/map',[DisplayController::class,'GetMap'])->name('get.map');
 // Route::get('/mypage',[DisplayController::class,'Mypage'])->name('my.page');
 Auth::routes();
 // Route::group(['middleware'=>'auth'],function(){
