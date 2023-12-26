@@ -15,11 +15,7 @@ class SpotController extends Controller
      */
     public function index()
     {
-        $spoting = new Spot;
-        $spots = $spoting->get();
-        return view('main',[
-            'spots'=>$spots,
-        ]);
+        //
     }
 
     /**
@@ -47,8 +43,7 @@ class SpotController extends Controller
         $spots = new Spot;
         $spots->name = $request->name;
         $spots->address = $request->address;
-        $spots->longitude = $request->longitude;
-        $spots->atitude = $request->atitude;
+        $spots->url = $request->url;
         $spots->save();
         return view('post_episode',[
             'spots'=>$spots,

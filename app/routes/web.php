@@ -28,5 +28,7 @@ Auth::routes();
 Route::resources([
     'posts'=>'PostController',
     'users'=>'UserController',
-    'spots'=>'SpotController',
+]);
+Route::resource('spots','SpotController')->only([
+    'store','destroy','create','edit','show'
 ]);

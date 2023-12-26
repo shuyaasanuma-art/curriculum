@@ -10,16 +10,18 @@
             <h1 class="text justify-content-center">新規スポット登録</h1>
         </div>
         <div class="row">
-            <form action="" method="get">
-                <input type="text" name="query">
-                <input type="submit" value="探す">
+            <form action="{{ route('spots.store')}}" method="post">
+                <input class="col-4" type="text" name="name" value="スキー場の名称">
+                <input class="col-4" type="text" name="address" value="住所">
+                <input class="col-10" type="text" name="url" value="こちらにGoogleMapのurlをペーストしてください">
+                <input type="submit" name="button" value="登録する">
             </form>
        </div>
     </div>
     <div class="container">
-        
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4659.22733592652!2d138.8042243346533!3d36.937387066609126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601e01f2be21bdb5%3A0xa688fd4b20a0c022!2z5rmv5rKi6auY5Y6f44K544Kt44O85aC077yP44OR44OO44Op44Oe44OR44O844Kv!5e0!3m2!1sja!2sus!4v1703564201149!5m2!1sja!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         <!-- 埋め込んだだけ -->
-        <iframe width="800" height="600" src="//www.google.com/maps/embed/v1/search?key=AIzaSyDLuIsMeevGk54UbK14LYapRfREb4jYppE&center=35.7943492,139.7925433&zoom=16&q=%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3"></iframe>
+        <!-- <iframe width="800" height="600" src="//www.google.com/maps/embed/v1/search?key=AIzaSyDLuIsMeevGk54UbK14LYapRfREb4jYppE&zoom=16&q=%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3"></iframe> -->
     </div>
 
     
@@ -28,10 +30,7 @@
             <a href="{{ route('posts.index')}}" class="col ">
                 <button class="btn btn-lg">マイページに戻る</button>
             </a>
-            <div class="col"></div>
-            <a href="{{ route('spots.create')}}" class="col">
-                <button class="btn btn-lg">登録する</button>
-            </a>   
+            
         </div>
     </div>
 </div>
