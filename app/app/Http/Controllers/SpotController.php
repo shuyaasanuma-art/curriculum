@@ -25,11 +25,12 @@ class SpotController extends Controller
      */
     public function create()
     {
-        $spoting = new Spot;
-        $spots = $spoting->get();
-        return view('post_spot',[
-            'spots'=>$spots,
-        ]);
+        // $spoting = new Spot;
+        // $spots = $spoting->get();
+        // var_dump($spots);
+        // return view('post_spot',[
+        //     'spots'=>$spots,
+        // ]);
     }
 
     /**

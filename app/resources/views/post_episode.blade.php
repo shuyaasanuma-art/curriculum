@@ -1,41 +1,60 @@
 @extends('layouts.layout')
+<br><br><br>
+
 <div>
-    <div>
+    <div class="container container-m">
         <div>
-            <h1>スポット情報</h1>
+            <h3>スポット情報</h3>
         </div>
-        <div>
-            <div>名称</div>
-            <div>〇〇スキー場</div>
+        <div class="row">
+            <div class="">名称:</div>
+            <div>{{ $spots->name}}</div>
         </div>
-        <div>
-            <div>所在地</div>
-            <div>住所000</div>
+        <div class="row">
+            <div>所在地:</div>
+            <div>{{ $spots->address }}</div>
         </div>
+        <a href="{{ $spots->url}}">{{ $spots->url}}</a>
     </div>
-    <div>
-        <div>
+    <form action="{{ route('posts.store')}}" >
+    
+    <div class="container container-m">
+        <div　class="container">
             <h1>エピソード登録</h1>
         </div>
-        <div>
-            <div>タイトル</div>
-            <input type="text" name="" id="">
+        <div class="row justify-content-center">
+                <div class="container">
+                    <div>タイトル</div>
+                    <input type="text" name="title" id="">
+                </div>
+                <div class="container">
+                    <div>日付</div>
+                    <input type="date" name="date" id="">
+                </div>
+                <div class="container">
+                    <div>評価登録</div>
+                    <input type="text" name="evolution" id="">
+                </div>
+                <div class="container">
+                    <div>画像</div>
+                    <input type="text" name="image" id="">
+                </div>
+                <div class="container">
+                    <div>コメント</div>
+                    <input type="text" name="episode" id="">
+                </div>
+                
+                
+            <div class="container">
+                <button type="submit" class="btn btn-lg">投稿内容確認</button>
+            </div>
         </div>
-        <div>
-            <div>評価登録</div>
-            <input type="text" name="" id="">
-        </div>
-        <div>
-            <div>画像</div>
-            <input type="text" name="" id="">
-        </div>
-        <div>
-            <div>コメント</div>
-            <input type="text" name="" id="">
-        </div>
+        
     </div>
-    <div>
-        <button>スポット登録に戻る</button>
-        <button>投稿内容確認</button>
+    </form>
+    <div class="container">
+            <a href="{{ route('posts.spot')}}" class="col ">
+                <button class="btn btn-lg">スポット登録に戻る</button>
+            </a>
     </div>
 </div>

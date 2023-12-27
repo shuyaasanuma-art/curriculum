@@ -1,5 +1,5 @@
-
 @extends('layouts.layout')
+
 
 <br>
 <br>
@@ -11,10 +11,11 @@
         </div>
         <div class="row">
             <form action="{{ route('spots.store')}}" method="post">
+                @csrf
                 <input class="col-4" type="text" name="name" value="スキー場の名称">
                 <input class="col-4" type="text" name="address" value="住所">
                 <input class="col-10" type="text" name="url" value="こちらにGoogleMapのurlをペーストしてください">
-                <input type="submit" name="button" value="登録する">
+                <input type="submit" name="button" value="一時保存">
             </form>
        </div>
     </div>
@@ -27,10 +28,12 @@
     
     <div class="container">
         <div class="row">
-            <a href="{{ route('posts.index')}}" class="col ">
+            <a href="{{ route('users.index')}}" class="col ">
                 <button class="btn btn-lg">マイページに戻る</button>
             </a>
-            
+            <a href="{{ route('spots.store')}}" class="col">
+                <button class="btn btn-lg">登録する</button>
+            </a>
         </div>
     </div>
 </div>

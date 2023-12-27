@@ -30,5 +30,5 @@ Route::resources([
     'users'=>'UserController',
 ]);
 Route::resource('spots','SpotController')->only([
-    'store','destroy','create','edit','show'
+    'store','destroy','edit','show'
 ]);

@@ -13,7 +13,7 @@
                         <!-- タイトル -->
                         <button type="button" class="btn btn-link">{{ $posts->title }}</button>
                         <!-- ユーザー名 -->
-                        <button class="btn btn-link">{{ $posts->user->name }}</button>
+                        <button class="btn btn-link">{{ $posts->name }}</button>
                         <div>{{ $posts->date }}</div>
                     </div>
                      <!-- コメント -->
