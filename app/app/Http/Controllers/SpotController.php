@@ -46,6 +46,7 @@ class SpotController extends Controller
         $spots->address = $request->address;
         $spots->url = $request->url;
         $spots->save();
+        
         return view('post_episode',[
             'spots'=>$spots,
         ]);

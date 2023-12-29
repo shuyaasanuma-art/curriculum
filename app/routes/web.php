@@ -12,23 +12,20 @@ use App\Http\Controllers\DisplayController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('main');
-// });
-Route::get('/',[PostController::class,'index']);
-// //投稿検索
-Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
-Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
-Route::get('/get/map',[DisplayController::class,'GetMap'])->name('get.map');
-// Route::get('/mypage',[DisplayController::class,'Mypage'])->name('my.page');
 Auth::routes();
+
+// Route::get('/mypage',[DisplayController::class,'Mypage'])->name('my.page');
+
 // Route::group(['middleware'=>'auth'],function(){
-    
-// });
-Route::resources([
+   Route::get('/',[PostController::class,'index']);
+   //投稿検索
+   Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
+   Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
+   Route::resources([
     'posts'=>'PostController',
     'users'=>'UserController',
-]);
-Route::resource('spots','SpotController')->only([
+   ]);
+   Route::resource('spots','SpotController')->only([
     'store','destroy','edit','show'
-]);
+   ]);
+// });

@@ -31,9 +31,8 @@
             <a href="{{ route('users.index')}}" class="col ">
                 <button class="btn btn-lg">マイページに戻る</button>
             </a>
-            <a href="{{ route('spots.store')}}" class="col">
-                <button class="btn btn-lg">登録する</button>
-            </a>
+          
         </div>
     </div>
+    
 </div>

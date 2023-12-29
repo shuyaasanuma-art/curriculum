@@ -16,8 +16,8 @@
         </div>
         <a href="{{ $spots->url}}">{{ $spots->url}}</a>
     </div>
-    <form action="{{ route('posts.store')}}" >
-    
+    <form action="{{ route('posts.store')}}"  method="post"  enctype="multipart/form-data">
+    @csrf
     <div class="container container-m">
         <div　class="container">
             <h1>エピソード登録</h1>
@@ -37,19 +37,17 @@
                 </div>
                 <div class="container">
                     <div>画像</div>
-                    <input type="text" name="image" id="">
+                    <input type="file" name="image">
                 </div>
                 <div class="container">
                     <div>コメント</div>
                     <input type="text" name="episode" id="">
-                </div>
-                
-                
+                </div>                
+                <div hidden></div>
             <div class="container">
-                <button type="submit" class="btn btn-lg">投稿内容確認</button>
+                <input type="submit" name="button" class="btn btn-lg" value="投稿内容確認">
             </div>
         </div>
-        
     </div>
     </form>
     <div class="container">
@@ -57,4 +55,5 @@
                 <button class="btn btn-lg">スポット登録に戻る</button>
             </a>
     </div>
+
 </div>

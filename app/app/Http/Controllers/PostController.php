@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Storage;
+
 class PostController extends Controller
 {
     /**
@@ -31,6 +35,7 @@ class PostController extends Controller
     public function create()
     {
         $posts = Post::where('del_flg',0)->get();
+        Storage::put('logo.jpg');
         return view('post_episode',[
             'posts'=>$posts,
         ]);
@@ -47,11 +52,23 @@ class PostController extends Controller
         $posts = new Post;
         $posts->title = $request->title;
         $posts->date = $request->date;
-        $posts->image = $request->image;
         $posts->episode = $request->episode;
         $posts->evolution = $request->evolution;
 
+        $posts->image = $request->image;
+
+        //送信されたファイルの取得
+        $img = $request->file('image');
+        //
+        // $path = Storage::putFile('images',$img);
+        
+        // $path = Storage::disk('public')->get('image');
+        var_dump($img);
+        
+        
+
         $posts->save();
+        
         return view('post_conf',[
             'posts'=>$posts,
         ]);
