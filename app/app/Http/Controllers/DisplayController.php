@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use App\Spot;
+
 class DisplayController extends Controller
 {
     public function index(){
@@ -17,9 +19,6 @@ class DisplayController extends Controller
         ]);
     }
     public function PostSpot(){
-        return view('post_spot');
-    }
-    public function GetMap(){
         return view('post_spot');
     }
 }

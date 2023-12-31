@@ -21,6 +21,7 @@ Auth::routes();
    //投稿検索
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
+   
    Route::resources([
     'posts'=>'PostController',
     'users'=>'UserController',

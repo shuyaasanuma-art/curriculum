@@ -14,6 +14,7 @@
             <div>所在地:</div>
             <div>{{ $spots->address }}</div>
         </div>
+        <div></div>
         <a href="{{ $spots->url}}">{{ $spots->url}}</a>
     </div>
     <form action="{{ route('posts.store')}}"  method="post"  enctype="multipart/form-data">
@@ -22,6 +23,7 @@
         <div　class="container">
             <h1>エピソード登録</h1>
         </div>
+        <div hidden >{{ $spots->name}}{{ $spots->address}}{{ $spots->url}}</div>
         <div class="row justify-content-center">
                 <div class="container">
                     <div>タイトル</div>

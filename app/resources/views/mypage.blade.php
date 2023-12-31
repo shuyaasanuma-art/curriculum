@@ -22,7 +22,7 @@
                     <button type="button" class="btn btn-sm">新規投稿</button>
                 </a>
                 <br>
-                <a href="">
+                <a href="{{ route('users.create')}}">
                     <button type="button" class="btn btn-sm">ユーザー情報編集</button>
                 </a>               
             </div>

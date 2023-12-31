@@ -34,11 +34,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        $posts = Post::where('del_flg',0)->get();
-        Storage::put('logo.jpg');
-        return view('post_episode',[
-            'posts'=>$posts,
-        ]);
+        // $posts = Post::where('del_flg',0)->get();
+        // Storage::put('logo.jpg');
+        // return view('post_episode',[
+        //     'posts'=>$posts,
+        // ]);
     }
 
     /**
@@ -70,6 +70,7 @@ class PostController extends Controller
         $posts->save();
         
         return view('post_conf',[
+            // 'spots'=>$spots,
             'posts'=>$posts,
         ]);
     }
