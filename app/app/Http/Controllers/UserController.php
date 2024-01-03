@@ -34,7 +34,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user_edit');
+        $user = new User;
+        $users = $user->where('del_flg','0')->get();
+        return view('user_edit',[
+            'users'=>$users,
+        ]);
     }
 
     /**
@@ -45,7 +49,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = new User;
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users->profile = $request->profile;
+
+        $users->image = $request->image;
+        // $users->save();
+        return view('user_edit_conf',[
+            'users'=>$users,
+        ]);
     }
 
     /**
@@ -56,7 +70,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        var_dump($post);
+        return view('user_delete_conf');
     }
 
     /**
