@@ -9,14 +9,14 @@
                 </div>
                 <div class="row">
                     <h5>名称：</h5>
-                    <h5>スキー場</h5>
+                    <h5>{{ $spots->name}}</h5>
                 </div>
                 <div class="row">
                     <h5>所在地:</h5>
-                    <h5>$spots->address</h5>
+                    <h5>{{$spots->address}}</h5>
                 </div>   
             </div>
-            <div>map</div>
+        
         </div> 
         <div  class="container container-lg">
             <div class="row">
@@ -31,8 +31,8 @@
                 <h5>{{ $posts->episode}}</h5>
             </div>
             <div class="col">
-            <img src="{{ url(\Storage::disk('public')->url($image ?? '')) }}">
-            画像</div>
+            <img src="{{ Storage::url($posts->image)}}" width="50%">
+            </div>
             </div>
             
             

@@ -34,7 +34,7 @@
         <button class="submit" >編集内容確認</button>
         </form>
         <div>
-            <form action="{{ route('users.show',['id'=> $users->id])}}">
+            <form action="{{ route('users.show',$users->id)}}">
             @csrf
                 <button type="submit" class="btn btn-sm">アカウント削除する</button>
             </form>

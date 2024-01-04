@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Post;
+use App\Spot;
+use App\User;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +22,8 @@ class PostController extends Controller
     public function index()
     {
         $posting = new Post;
-        // $posts = $posting->orderby('created_at','DESC')->paginate(6);
-        $posts = $posting->first();
+        $posts = $posting->orderby('created_at','DESC')->paginate(6);
+        // $posts = $posting->first();
         return view('main',[
             'posts'=>$posts,
         ]);
@@ -55,22 +57,23 @@ class PostController extends Controller
         $posts->episode = $request->episode;
         $posts->evolution = $request->evolution;
 
-        $posts->image = $request->image;
-
         //送信されたファイルの取得
         $img = $request->file('image');
-        //
-        // $path = Storage::putFile('images',$img);
+        //storage > public > img配下に画像が保存される   
+        $path = $img->store('img','public');
         
-        // $path = Storage::disk('public')->get('image');
-        var_dump($img);
+        // var_dump($path);
+        $posts->image = $path;
         
-        
-
         $posts->save();
         
+        $spots = new Spot;
+        $spots->name = $request->name;
+        $spots->address = $request->address;
+        $spots->url = $request->url;
+        
         return view('post_conf',[
-            // 'spots'=>$spots,
+            'spots'=>$spots,
             'posts'=>$posts,
         ]);
     }
@@ -85,7 +88,14 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
-        return view('post_deteil',[
+        // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
+        // if ($posts->id == user_id) {
+        //     # code...
+        //     return view('my_post',[
+        //         'posts'=>$posts,
+        //     ]);
+        // }
+        return view('post_detail',[
             'posts'=>$posts,
         ]);
     }

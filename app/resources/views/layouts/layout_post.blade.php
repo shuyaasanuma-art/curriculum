@@ -7,17 +7,25 @@
         <div class="col-xl-20">
             <div class="card">
                 <!-- 投稿画像 -->
-                <button class="card-img-top p-5" src="sample.png" alt="Rounded image">{{ $posts->image }}</button>
+                <button><img src="{{ Storage::url($post->image)}}" class="card-img-top p-5" alt="Rounded image" width="20%"></button>
                 <div class="card-body">  
                     <div>
                         <!-- タイトル -->
-                        <button type="button" class="btn btn-link">{{ $posts->title }}</button>
+                        <a href="{{route('posts.show',$post->id)}}"　method="get">
+   
+                           <button class="btn btn-link">{{ $post->title }}</button>
+                        </a>
                         <!-- ユーザー名 -->
-                        <button class="btn btn-link">{{ $posts->name }}</button>
-                        <div>{{ $posts->date }}</div>
+                        <a href="{{route('posts.show',$post->id)}}"　method="get">
+                            <button class="btn btn-link">{{ $post->name }}</button>
+                        </a>
+                        <div>{{ $post->date }}</div>
                     </div>
                      <!-- コメント -->
-                     <button type="button" class="btn btn-link">{{ $posts->episode }}</button>
+                    <a href="{{route('posts.show',$post->id)}}"　method="get">
+                        <button class="btn btn-link">{{ $post->episode }}</button>
+                    </a>
+                     
                      
                 </div>
             </div>

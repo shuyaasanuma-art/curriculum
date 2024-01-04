@@ -35,7 +35,7 @@ class UserController extends Controller
     public function create()
     {
         $user = new User;
-        $users = $user->where('del_flg','0')->get();
+        $users = $user->where('del_flg','0')->first();
         return view('user_edit',[
             'users'=>$users,
         ]);
@@ -70,9 +70,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        var_dump($post);
-        return view('user_delete_conf');
+        
+        $users = User::find($id);
+        // var_dump($users);
+        return view('user_delete_conf',[
+            'users'=>$users,
+        ]);
     }
 
     /**
@@ -106,6 +109,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $users = User::find($id);
+        $users -> delete();
+        return redirect('/');
     }
 }
