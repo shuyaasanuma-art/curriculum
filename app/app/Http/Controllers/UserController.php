@@ -20,7 +20,7 @@ class UserController extends Controller
         $user = new User;
         $users = $user->with('follow')->first();
         $posting = new Post;
-        $posts = $posting->first();
+        $posts = $posting->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'users'=>$users,
             'posts'=>$posts,

@@ -1,29 +1,29 @@
-@extends('layouts.layout')
-<br>
-<br>
-<br>
-<div class="container container-m">
-    <div class="card-deck">
-        <div class="col-xl-20">
-            <div class="card">
+
+
+<div class="">
+    <div class="my-5">
+        <div class="">
+            <div class="row">
                 <!-- 投稿画像 -->
-                <button><img src="{{ Storage::url($post->image)}}" class="card-img-top p-5" alt="Rounded image" width="20%"></button>
-                <div class="card-body">  
+                <a class="col" href="{{ route('posts.show',optional($post)->id  ??'')}}">
+                    <img src="{{ Storage::url(optional($post)->image)}}" class="rounded-circle"  width="150" height="150">
+                </a>
+                <div class="col">  
                     <div>
                         <!-- タイトル -->
-                        <a href="{{route('posts.show',$post->id)}}"　method="get">
+                        <a href="{{route('posts.show',optional($post)->id ??'')}}"　method="get">
    
-                           <button class="btn btn-link">{{ $post->title }}</button>
+                           <button class="btn btn-link">{{ optional($post)->title }}</button>
                         </a>
                         <!-- ユーザー名 -->
-                        <a href="{{route('posts.show',$post->id)}}"　method="get">
-                            <button class="btn btn-link">{{ $post->name }}</button>
+                        <a href="{{route('posts.show',optional($post)->id ??'')}}"　method="get">
+                            <button class="btn btn-link">{{ optional($post)->name }}</button>
                         </a>
-                        <div>{{ $post->date }}</div>
+                        <div>{{ optional($post)->date }}</div>
                     </div>
                      <!-- コメント -->
-                    <a href="{{route('posts.show',$post->id)}}"　method="get">
-                        <button class="btn btn-link">{{ $post->episode }}</button>
+                    <a href="{{route('posts.show',optional($post)->id ??'')}}"　method="get">
+                        <button class="btn btn-link">{{ optional($post)->episode }}</button>
                     </a>
                      
                      

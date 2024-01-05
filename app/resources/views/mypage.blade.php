@@ -40,12 +40,12 @@
         </div>
     </div>
     <div class="container">
-       <div class="row">
-        <div class="col-4">@include('layouts.layout_post')</div>
-        <div class="col-4">@include('layouts.layout_post')</div>
-        <div class="col-4">@include('layouts.layout_post')</div>
-       </div>
+    <div class="row row-cols-3">
+        @foreach($posts as $post)
+            @include('layouts.layout_post')
+        @endforeach
     </div>
+</div>
     <br>
     <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">

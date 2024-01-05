@@ -19,13 +19,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $posting = new Post;
         $posts = $posting->orderby('created_at','DESC')->paginate(6);
-        // $posts = $posting->first();
+        $sort = $request->sort;
         return view('main',[
             'posts'=>$posts,
+            'sort'=>$sort,
         ]);
     }
 
@@ -88,6 +89,9 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
+        // $spots = Spot::find($id);
+        $users = User::find($id);
+        // var_dump($spots);
         // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
         // if ($posts->id == user_id) {
         //     # code...
@@ -97,6 +101,8 @@ class PostController extends Controller
         // }
         return view('post_detail',[
             'posts'=>$posts,
+            'users'=>$users,
+            // 'spots'=>$spots,
         ]);
     }
 
