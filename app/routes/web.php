@@ -16,12 +16,12 @@ Auth::routes();
 
 // Route::get('/mypage',[DisplayController::class,'Mypage'])->name('my.page');
 
-// Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>'auth'],function(){
    Route::get('/',[PostController::class,'index']);
    //投稿検索
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
-   
+
    Route::resources([
     'posts'=>'PostController',
     'users'=>'UserController',
@@ -29,4 +29,12 @@ Auth::routes();
    Route::resource('spots','SpotController')->only([
     'store','destroy','edit','show'
    ]);
-// });
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -30,27 +30,22 @@
         </div>
         <div class="container container-lg border">
             <div class="row m-5">
-                 <div class="col-6">
-                 <!-- アイコン画像 -->
-                <h5>タイトル</h5>
-                <h5>{{ $posts->title}}</h5>
-                <h5>日付</h5>
-                <h5>{{ $posts->date}}</h5>
-                <div class="row">
-                    <h5 class="col">評価</h5>
-                    <h5 class="col">{{ $posts->evolution}}</h5>
-                </div>
+                   <div class="col-6">
+                        <!-- アイコン画像 -->
                 
-                <h5>コメント</h5>
-                <h5>{{ $posts->episode}}</h5>
+                        <h4 class="font-weight-bolder">{{ $posts->title}}</h4>
+              
+                        <h5>{{ $posts->date}}</h5>
+                        <div class="row">
+                            <h5 class="col">評価</h5>
+                            <h5 class="col-10">{{ $posts->evolution}}</h5>
+                        </div>
+                        <h5>{{ $posts->episode}}こおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおお</h5>
+                    </div>
+                    <div class="col">
+                        <img src="{{ Storage::url($posts->image)}}" width="100%">
+                    </div>
             </div>
-            <div class="col">
-            <img src="{{ Storage::url($posts->image)}}" width="100%">
-            </div>
-            </div>
-            
-            
-
         </div>
     </div>
     </form>

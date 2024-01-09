@@ -8,13 +8,13 @@
         <div class="row">
             <div class="col-8">
                 <div class="row">
-                    <div>アイコン画像</div>
+                    <div>{{ optional($users)->image ??''}}</div>
                     <h4>フォロー</h4>
                     <h4>フォロワー</h4>
                 </div>
                 <div>
-                    <div>{{ $users->name }}</div>
-                    <div>{{ $users->profile }}</div>
+                    <div>{{ optional($users)->name ??''}}</div>
+                    <div placeholder="プロフィール">{{ optional($users)->profile ??''}}</div>
                 </div>
             </div>
             <div class="col">
@@ -45,25 +45,12 @@
             @include('layouts.layout_post')
         @endforeach
     </div>
-</div>
-    <br>
-    <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link" href="#!" aria-label="Previous">
-        <span aria-hidden="true">«</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#!">1</a></li>
-    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#!" aria-label="Next">
-        <span aria-hidden="true">»</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">{{ $posts->links() }}</div>
+            <div class="col"></div>
+        </div>
+    </div>
 </div>

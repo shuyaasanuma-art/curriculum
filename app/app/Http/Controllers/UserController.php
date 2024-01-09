@@ -8,6 +8,8 @@ use App\User;
 use App\Post;
 use App\Follow;
 
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     /**
@@ -17,10 +19,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        $users = $user->with('follow')->first();
-        $posting = new Post;
-        $posts = $posting->orderby('created_at','DESC')->paginate(6);
+        // $user = new User;
+        $users = Auth::user()->get();
+        // var_dump($users);
+        $posts = Auth::user()->post()->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'users'=>$users,
             'posts'=>$posts,
@@ -49,17 +51,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $users = new User;
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $users->profile = $request->profile;
+        // $users = new User;
+        // $users->name = $request->name;
+        // $users->email = $request->email;
+        // $users->password = $request->password;
+        // $users->profile = $request->profile;
 
-        $users->image = $request->image;
+        // $users->image = $request->image;
         // $users->save();
-        return view('user_edit_conf',[
-            'users'=>$users,
-        ]);
+        // return view('user_edit_conf',[
+        //     'users'=>$users,
+        // ]);
     }
 
     /**
@@ -98,7 +100,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = Auth::user()->find($id);
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = $request->password;
+        $users->profile = $request->profile;
+        // var_dump($users);
+        // $img = $request->file('image');
+        $img = $request->image;
+        var_dump($img);
+        $path = $img->store('img','public');
+        $users->image = $path;
+        
+        Auth::user()->user()->save($users);
+        return view('user_edit_conf',[
+            'users'=>$users,
+        ]);
     }
 
     /**

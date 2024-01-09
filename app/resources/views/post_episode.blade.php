@@ -24,7 +24,7 @@
             <h1>エピソード登録</h1>
         </div>
         <div hidden>{{ $spots->name}}{{ $spots->address}}{{ $spots->url}}
-            <input type="text" name="name" id="" value="{{ $spots->name}}">
+            <input type="text" name="id" id="" value="{{ $spots->id}}">
             <input type="text" name="address" id="" value="{{ $spots->address}}">
             <input type="text" name="url" id="" value="{{ $spots->url}}">
         </div>

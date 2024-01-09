@@ -74,9 +74,9 @@ class SpotController extends Controller
      */
     public function edit($id)
     {
-        $spots = Spot::find($id);
+        // $spots = Spot::find($id);
         return view('post_edit',[
-            'spots'=>$spots,
+            // 'spots'=>$spots,
         ]);
     }
 

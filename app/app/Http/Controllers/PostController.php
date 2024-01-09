@@ -60,21 +60,16 @@ class PostController extends Controller
 
         //送信されたファイルの取得
         $img = $request->file('image');
+        
         //storage > public > img配下に画像が保存される   
         $path = $img->store('img','public');
-        
-        // var_dump($path);
         $posts->image = $path;
+        $posts->spot_id = $request->id;
+        Auth::user()->post()->save($posts);
         
-        $posts->save();
-        
-        $spots = new Spot;
-        $spots->name = $request->name;
-        $spots->address = $request->address;
-        $spots->url = $request->url;
         
         return view('post_conf',[
-            'spots'=>$spots,
+            // 'spots'=>$spots,
             'posts'=>$posts,
         ]);
     }
@@ -89,20 +84,22 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
-        // $spots = Spot::find($id);
+        $spots = Spot::find($id);
         $users = User::find($id);
         // var_dump($spots);
         // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
-        // if ($posts->id == user_id) {
-        //     # code...
-        //     return view('my_post',[
-        //         'posts'=>$posts,
-        //     ]);
-        // }
+        if ($posts->id == user_id) {
+            # code...
+            return view('my_post',[
+                'posts'=>$posts,
+                'users'=>$users,
+                'spots'=>$spots,
+            ]);
+        }
         return view('post_detail',[
             'posts'=>$posts,
             'users'=>$users,
-            // 'spots'=>$spots,
+            'spots'=>$spots,
         ]);
     }
 

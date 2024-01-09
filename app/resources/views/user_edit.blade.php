@@ -3,8 +3,9 @@
 <div class="container container-m">
     <div>
         <h3 class="text-align-center">アカウント情報編集</h3>
-        <form action="{{ route('users.store')}}" method="post">
+        <form action="{{ route('users.update',$users->id)}}" method="post">
         @csrf
+        @method('PUT')
         <div class="container">
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">ユーザー名</label>

@@ -9,11 +9,11 @@
                 </div>
                 <div class="row">
                     <h5>名称：</h5>
-                    <h5>{{ $spots->name}}</h5>
+                    <h5>{{ $posts->spot->name}}</h5>
                 </div>
                 <div class="row">
                     <h5>所在地:</h5>
-                    <h5>{{$spots->address}}</h5>
+                    <h5>{{$posts->spot->address}}</h5>
                 </div>   
             </div>
         
