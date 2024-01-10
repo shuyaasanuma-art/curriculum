@@ -23,10 +23,10 @@
 <body>
    <div id="app">
     <nav class="navbar fixed-top navbar-light " style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="{{ url('/') }}">ロゴ</a>
+        <a class="navbar-brand" href="{{ url('/') }}">ホーム</a>
         <div class="my-navbar-control">
                 @if(Auth::check())
-                    <a class="my-navbar-item" href="{{ route('users.index')}}">アイコン{{ Auth::user()->image }}</a>
+                    <a class="my-navbar-item" href="{{ route('users.index')}}"><img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="50" height="50"></a>
                     /
                     <a href="{{ route('login')}}" id="logout" class="my-navbar-item">ログアウト</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

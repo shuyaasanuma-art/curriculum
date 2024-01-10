@@ -22,7 +22,7 @@
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">画像</label>
-                <div>{{ $users->image}}</div>
+                <img src="{{Storage::url(optional($users)->image)}}" width="150" height="150" alt="">
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">プロフィール</label>

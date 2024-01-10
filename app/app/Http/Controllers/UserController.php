@@ -19,9 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $user = new User;
-        $users = Auth::user()->get();
-        // var_dump($users);
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = Auth::user()->post()->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'users'=>$users,
@@ -36,8 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = new User;
-        $users = $user->where('del_flg','0')->first();
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         return view('user_edit',[
             'users'=>$users,
         ]);
@@ -99,10 +98,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $users = new User;
-        
-        // $users = Auth::user()->find($id);
+    {   
+        $users = Auth::user()->find($id);
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = $request->password;

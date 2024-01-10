@@ -21,12 +21,18 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        // ユーザーIDを定義してそのユーザーIDを引っ張ればいいんじゃぜ
+        $user_id = Auth::id();
+        // var_dump($user_id);
+        $users = Auth::user()->find($user_id);
+        // var_dump($users);
         $posting = new Post;
         $posts = $posting->orderby('created_at','DESC')->paginate(6);
         $sort = $request->sort;
         return view('main',[
             'posts'=>$posts,
             'sort'=>$sort,
+            'users'=>$users,
         ]);
     }
 
@@ -81,19 +87,20 @@ class PostController extends Controller
     // 自分以外の投稿詳細ページへ
     public function show($id)
     {
+        
         $posts = Post::find($id);
-        $spots = Spot::find($id);
+        // $spots = Spot::find($id);
         $users = User::find($id);
         // var_dump($spots);
         // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
-        if ($posts->id == user_id) {
-            # code...
-            return view('my_post',[
-                'posts'=>$posts,
-                'users'=>$users,
-                'spots'=>$spots,
-            ]);
-        }
+        // if ($posts->user_id == $user->id) {
+        //     $users = Auth::user()->find($id);
+        //     return view('my_post',[
+        //         'posts'=>$posts,
+        //         'users'=>$users,
+        //         'spots'=>$spots,
+        //     ]);
+        // }
         return view('post_detail',[
             'posts'=>$posts,
             'users'=>$users,

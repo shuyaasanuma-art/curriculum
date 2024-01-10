@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Post;
+use Illuminate\Support\Facades\Auth;
 
+use App\Post;
+use App\User;
 use App\Spot;
 
 class DisplayController extends Controller
@@ -19,6 +21,11 @@ class DisplayController extends Controller
         ]);
     }
     public function PostSpot(){
-        return view('post_spot');
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        // var_dump($users);
+        return view('post_spot',[
+            'users'=>$users,
+        ]);
     }
 }

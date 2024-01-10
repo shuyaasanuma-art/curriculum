@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="row">
-                    <div>{{ optional($users)->image ??''}}</div>
+                    <img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="150" height="150">
                     <h4>フォロー</h4>
                     <h4>フォロワー</h4>
                 </div>

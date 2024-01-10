@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Spot;
 
 class SpotController extends Controller
@@ -41,6 +43,8 @@ class SpotController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $spots = new Spot;
         $spots->name = $request->name;
         $spots->address = $request->address;
@@ -49,6 +53,7 @@ class SpotController extends Controller
         
         return view('post_episode',[
             'spots'=>$spots,
+            'users'=>$users,
         ]);
     }
 
