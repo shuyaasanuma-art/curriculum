@@ -100,19 +100,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = Auth::user()->find($id);
+        $users = new User;
+        
+        // $users = Auth::user()->find($id);
         $users->name = $request->name;
         $users->email = $request->email;
         $users->password = $request->password;
         $users->profile = $request->profile;
         // var_dump($users);
-        // $img = $request->file('image');
-        $img = $request->image;
-        var_dump($img);
-        $path = $img->store('img','public');
-        $users->image = $path;
-        
-        Auth::user()->user()->save($users);
+        $dir = 'img';
+        $img = $request->file('image')->getClientOriginalName();
+        $users->image = $request->file('image')->storeAs('public/' . $dir, $img);
+        // var_dump($users->image);
+        $users->save();
         return view('user_edit_conf',[
             'users'=>$users,
         ]);

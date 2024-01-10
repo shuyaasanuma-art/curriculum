@@ -17,7 +17,7 @@ class CreateSpotsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name','100');
             $table->string('address','100');
-            $table->string('url','300');
+            $table->text('url');
             $table->timestamps();
         });
     }

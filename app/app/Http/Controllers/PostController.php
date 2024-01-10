@@ -60,7 +60,6 @@ class PostController extends Controller
 
         //送信されたファイルの取得
         $img = $request->file('image');
-        
         //storage > public > img配下に画像が保存される   
         $path = $img->store('img','public');
         $posts->image = $path;
@@ -69,7 +68,6 @@ class PostController extends Controller
         
         
         return view('post_conf',[
-            // 'spots'=>$spots,
             'posts'=>$posts,
         ]);
     }

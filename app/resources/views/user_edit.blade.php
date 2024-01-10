@@ -3,7 +3,7 @@
 <div class="container container-m">
     <div>
         <h3 class="text-align-center">アカウント情報編集</h3>
-        <form action="{{ route('users.update',$users->id)}}" method="post">
+        <form action="{{ route('users.update',$users->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="container">
@@ -25,7 +25,7 @@
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">画像</label>
-                <input type="file" name="image" placeholder="">
+                <input type="file" name="image">
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">プロフィール</label>
