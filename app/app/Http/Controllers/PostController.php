@@ -43,11 +43,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        // $posts = Post::where('del_flg',0)->get();
-        // Storage::put('logo.jpg');
-        // return view('post_episode',[
-        //     'posts'=>$posts,
-        // ]);
+        // 
     }
 
     /**
@@ -58,6 +54,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = new Post;
         $posts->title = $request->title;
         $posts->date = $request->date;
@@ -75,6 +73,7 @@ class PostController extends Controller
         
         return view('post_conf',[
             'posts'=>$posts,
+            'users'=>$users,
         ]);
     }
 
@@ -87,10 +86,12 @@ class PostController extends Controller
     // 自分以外の投稿詳細ページへ
     public function show($id)
     {
-        
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = Post::find($id);
+        var_dump($posts);
         // $spots = Spot::find($id);
-        $users = User::find($id);
+        // $users = User::find($id);
         // var_dump($spots);
         // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
         // if ($posts->user_id == $user->id) {
@@ -104,7 +105,7 @@ class PostController extends Controller
         return view('post_detail',[
             'posts'=>$posts,
             'users'=>$users,
-            'spots'=>$spots,
+            // 'spots'=>$spots,
         ]);
     }
 
