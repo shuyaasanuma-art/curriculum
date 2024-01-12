@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-<?php phpinfo();?>
+
 <body>
 <div>
    <br>

@@ -11,10 +11,10 @@ use App\Http\Controllers\DisplayController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::get('/',function(){
+//  return view('welcome');
+// });
 Auth::routes();
-
-// Route::get('/mypage',[DisplayController::class,'Mypage'])->name('my.page');
 
 Route::group(['middleware'=>'auth'],function(){
    Route::get('/',[PostController::class,'index']);
