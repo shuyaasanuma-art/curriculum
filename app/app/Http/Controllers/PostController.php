@@ -89,23 +89,9 @@ class PostController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $posts = Post::find($id);
-        var_dump($posts);
-        // $spots = Spot::find($id);
-        // $users = User::find($id);
-        // var_dump($spots);
-        // ユーザーIDが投稿と一致した時、自身の投稿詳細ページへ
-        // if ($posts->user_id == $user->id) {
-        //     $users = Auth::user()->find($id);
-        //     return view('my_post',[
-        //         'posts'=>$posts,
-        //         'users'=>$users,
-        //         'spots'=>$spots,
-        //     ]);
-        // }
         return view('post_detail',[
             'posts'=>$posts,
             'users'=>$users,
-            // 'spots'=>$spots,
         ]);
     }
 
@@ -117,9 +103,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = Post::find($id);
         return view('post_edit',[
             'posts'=>$posts,
+            'users'=>$users,
         ]);
     }
 

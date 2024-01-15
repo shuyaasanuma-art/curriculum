@@ -11,21 +11,24 @@
                 </div>
                 <div class="row">
                     <h5>名称：</h5>
-                    <h5> $spots->name</h5>
+                    <h5> {{$posts->spot->name}}</h5>
                 </div>
                 <div class="row">
                     <h5>所在地:</h5>
-                    <h5>$spots->address</h5>
+                    <h5>{{$posts->spot->address}}</h5>
                 </div>   
             </div>
         
         </div> 
         <div class="container container-lg border">
             <div class="row m-2">
-                <div class="col"><h1>$users->image</h1></div>
-                <div class="col">$users->name</div>
+                <div class="col"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
+                <div class="col"><h4>{{$posts->user->name}}</h4></div>
                 <div class="col">いいね数</div>
-                <button type="submit">投稿編集</button>                
+                <!-- ユーザーと投稿のidが一致した時 -->
+                @if($posts->user_id === Auth::user()->id)
+                <button type="submit">投稿編集</button> 
+                @endif               
             </div>
         </div>
         <div class="container container-lg border">
