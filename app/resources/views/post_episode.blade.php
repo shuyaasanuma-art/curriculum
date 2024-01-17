@@ -47,7 +47,7 @@
                 </div>
                 <div class="container">
                     <div>コメント</div>
-                    <input type="text" name="episode" id="">
+                    <textarea type="text" name="episode" id=""></textarea>
                 </div>                
                 <div hidden></div>
             <div class="container">

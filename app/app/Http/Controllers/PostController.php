@@ -105,7 +105,8 @@ class PostController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::find($id);
+        $posts = Post::where('user_id',$user_id)->first();
+        // var_dump($posts);
         return view('post_edit',[
             'posts'=>$posts,
             'users'=>$users,
@@ -121,13 +122,24 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $instance = new Post;
-        $posts = $instance->find($id);
-        $columns = ['title','date','image','episode','evolution'];
-        foreach($columns as $column){
-            $posts->$column=$request->$column;
-        }
-        $posts->save();
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        $posts = Post::where('user_id',$user_id)->first();
+        $posts->title = $request->title;
+        $posts->date = $request->date;
+        $posts->episode = $request->episode;
+        $posts->evolution = $request->evolution;
+        $posts->image = $request->image;
+        // var_dump($posts->image);
+        // $dir = 'img';
+        // $img = $request->file('image')->getClientOriginalName();
+        // $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
+        Auth::user()->post()->save($posts);
+        
+        return view('post_detail',[
+            'users'=>$users,
+            'posts'=>$posts,
+        ]);
     }
 
     /**

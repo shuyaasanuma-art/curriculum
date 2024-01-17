@@ -21,13 +21,15 @@ Route::group(['middleware'=>'auth'],function(){
    //投稿検索
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
+   Route::post('/post/check',[DisplayController::class,'PostCheck'])->name('posts.check');
+   Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
 
    Route::resources([
     'posts'=>'PostController',
     'users'=>'UserController',
    ]);
    Route::resource('spots','SpotController')->only([
-    'store','destroy','edit','show'
+    'store','destroy','edit','show','update'
    ]);
 });
 

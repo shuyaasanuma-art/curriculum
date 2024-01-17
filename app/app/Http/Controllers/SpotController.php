@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Spot;
+use App\Post;
 
 class SpotController extends Controller
 {
@@ -97,7 +98,22 @@ class SpotController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        $spots = Spot::find($id);
+        $spot_id = $spots->id;
+        $posts = Post::where('spot_id',$spot_id)->first();
+        $columns = ['name','address','url'];
+        foreach($columns as $column){
+            $spots->$column = $request->$column;
+        }
+        $spots -> save();
         
+        return view('post_edit',[
+            'spots'=>$spots,
+            'users'=>$users,
+            'posts'=>$posts,
+        ]);
     }
 
     /**

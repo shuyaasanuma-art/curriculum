@@ -104,13 +104,12 @@ class UserController extends Controller
         $users->email = $request->email;
         $users->password = $request->password;
         $users->profile = $request->profile;
-        // var_dump($users);
-        $dir = 'img';
-        $img = $request->file('image')->getClientOriginalName();
-        $users->image = $request->file('image')->storeAs('public/' . $dir, $img);
+        $users->image = $request->image;
         // var_dump($users->image);
         $users->save();
-        return view('user_edit_conf',[
+        $posts = Auth::user()->post()->orderby('created_at','DESC')->paginate(6);
+        return view('mypage',[
+            'posts'=>$posts,
             'users'=>$users,
         ]);
     }

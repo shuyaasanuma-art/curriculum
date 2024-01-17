@@ -11,15 +11,16 @@
 <div>
     <div class="container container-m">
         <div>
-            <h1 class="text justify-content-center">新規スポット登録</h1>
+            <h1 class="text justify-content-center">スポット編集</h1>
         </div>
         <div class="row">
-            <form action="{{ route('spots.store')}}" method="post">
+            <form action="{{ route('spots.update',$spots->id)}}" method="post">
                 @csrf
-                <input class="col-4" type="text" name="name" placeholder="スキー場の名称">
-                <input class="col-4" type="text" name="address" placeholder="住所">
-                <input class="col-10" type="text" name="url" placeholder="こちらにGoogleMapのurlをペーストしてください">
-                <input type="submit" name="button" value="次に進む">
+                @method('PUT')
+                <input class="col-4" type="text" name="name" placeholder="{{$spots->name}}">
+                <input class="col-4" type="text" name="address" placeholder="{{$spots->address}}">
+                <input class="col-10" type="text" name="url" placeholder="{{$spots->url}}">
+                <input type="submit" name="button" value="再登録">
             </form>
        </div>
     </div>
@@ -30,8 +31,8 @@
     
     <div class="container">
         <div class="row">
-            <a href="{{ route('users.index')}}" class="col ">
-                <button class="btn btn-lg">マイページに戻る</button>
+            <a href="{{route('posts.edit',$spots->id)}}" class="col ">
+                <button class="btn btn-lg">編集画面に戻る</button>
             </a>
           
         </div>

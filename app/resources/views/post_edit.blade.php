@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.edit',$posts->id)}}" method="get">
+    <form action="{{ route('posts.check')}}" method="post" enctype="multipart/form-data">
     @csrf
         <div  class="container container-lg border">
           <div class="row">
@@ -18,14 +18,14 @@
                     <h5>所在地:</h5>
                     <h5>{{$posts->spot->address}}</h5>
                 </div>   
-                <div>
+                <div class="row">
                     <h5>URL：</h5>
-                    <div>{{ $posts->spot->url}}</div>
+                    <h5><a href="{{ $posts->spot->url}}">クリックで登録したスポットに飛びます</a></h5>
                 </div>
             </div>
             <div class="col m-5">
                 <a href="{{ route('spots.edit',$posts->spot_id)}}">
-                    <button class="">スポットを変更する</button>
+                    スポットを変更する
                 </a>
             </div>
           </div>
@@ -34,29 +34,45 @@
 
         <div class="container container-lg border">
             <div class="row m-5">
-                   <div class="col-6">
+                   <div class="col-6 m-2">
                         <!-- アイコン画像 -->
                 
-                        <h4 class="font-weight-bolder">{{ $posts->title}}</h4>
-              
-                        <h5>{{ $posts->date}}</h5>
-                        <div class="row">
-                            <h5 class="col">評価</h5>
-                            <h5 class="col-10">{{ $posts->evolution}}</h5>
+                        <h4 class="font-weight-bolder">エピソード編集</h4>
+                        <div class="container m-2">
+                            <input type="text" name="title" placeholder="{{ $posts->title}}">
                         </div>
-                        <h5>{{ $posts->episode}}</h5>
+                        <div class="container m-2">
+                            <input type="date" name="date">
+                        </div>
+                        <div class="container row m-2">
+                            <h5 class="col">評価</h5>
+                            <input class="col" type="number" name="evolution" min="1" max="5" placeholder="{{ $posts->evolution}}">
+                            <div class="col-7"></div>
+                        </div>
+                        <div class="container m-2">
+                            <textarea type="text" name="episode" placeholder="{{ $posts->episode}}"></textarea>
+                        </div>
                     </div>
                     <div class="col">
-                        <img src="{{ Storage::url($posts->image)}}" width="400"　height="400">
+                        <input type="file" name="image">
+                        <div>以前投稿した写真⇩</div>
+                        <img src="{{ Storage::url($posts->image)}}" width="300"　height="300">
                     </div>
             </div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button type="submit">編集内容確認</button>
         </div>
     </div>
     </form>
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href=""></a>
+                <a href="">
+                    <button>削除する</button>
+                </a>
             </div>
         </div>
     </div>
