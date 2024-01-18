@@ -31,6 +31,9 @@
                 <input type="text" name="profile" placeholder="プロフィール入力">
             </div>
         </div>
+        <div>
+            
+        </div>
         <button class="submit" >編集内容確認</button>
         </form>
         <div>

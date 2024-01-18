@@ -62,17 +62,18 @@
         </div>
     </div>
     <div>
-        <div>
+        <div class="container">
             <button type="submit">編集内容確認</button>
         </div>
     </div>
     </form>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <a href="">
+            <div class="col m-2">
+                <form action="{{ route('posts.checkdestroy',$posts->id)}}" method="post">
+                @csrf
                     <button>削除する</button>
-                </a>
+                </form>
             </div>
         </div>
     </div>

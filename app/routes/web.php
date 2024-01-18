@@ -23,6 +23,7 @@ Route::group(['middleware'=>'auth'],function(){
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
    Route::post('/post/check',[DisplayController::class,'PostCheck'])->name('posts.check');
    Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
+   Route::post('/post/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
 
    Route::resources([
     'posts'=>'PostController',
@@ -31,6 +32,12 @@ Route::group(['middleware'=>'auth'],function(){
    Route::resource('spots','SpotController')->only([
     'store','destroy','edit','show','update'
    ]);
+//    Route::post('/like/{postId}',[LikeController::class,'store']);
+//    Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
+   //「ajaxlike.jsファイルのurl:'ルーティング'」に書くものと合わせる。
+//    Route::post('ajaxlike', 'PostController@ajaxlike')->name('posts.ajaxlike');
+Route::post('/like', 'DisplayController@like')->name('posts.like');
+
 });
 
 

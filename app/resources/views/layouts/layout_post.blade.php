@@ -25,7 +25,22 @@
                     <a href="{{route('posts.show',optional($post)->id ??'')}}"　method="get">
                         <button class="btn btn-link">{{ optional($post)->episode }}</button>
                     </a>
-                     
+                    
+                    
+                    @auth
+                        <!--Post.phpに作ったisLikedByメソッドをここで使用 -->
+                        @if (!$posts->isLikedBy(Auth::user()))
+                            <span class="likes">
+                                <i class="fas fa-music like-toggle" data-post-id="{{ $post->id }}"></i>
+                                <span class="like-counter">{{$post->likes_count}}</span>
+                            </span><!-- /.likes -->
+                        @else
+                            <span class="likes">
+                                <i class="fas fa-music heart like-toggle liked" data-post-id="{{ $post->id }}"></i>
+                                <span class="like-counter">{{$post->likes_count}}</span>
+                            </span><!-- /.likes -->
+                        @endif
+                    @endauth
                      
                 </div>
             </div>

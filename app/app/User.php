@@ -40,9 +40,33 @@ class User extends Authenticatable
     public function post(){
         return $this->hasMany('App\Post');
     }
-    public function like(){
+    public function likes(){
         return $this->hasMany('App\Like');
     }
+    // public function likes(){
+    //     return $this->belogsToMany('App\Model\Post','likes','user_id','post_id');
+    // }
+    // public function islike($postId){
+    //     return $this->likes()->where('post_id',$postId)->exists();
+    // }
+    // public function like($postId)
+    // {
+    //   if($this->isLike($postId)){
+    //     //もし既に「いいね」していたら何もしない
+    //   } else {
+    //     $this->likes()->attach($postId);
+    //   }
+    // }
+    // public function unlike($postId)
+    // {
+    //   if($this->isLike($postId)){
+    //     //もし既に「いいね」していたら消す
+    //     $this->likes()->detach($postId);
+    //   } else {
+    //   }
+    // }
+
+
     public function follow(){
         return $this->hasMany('App\Follow');
     }
