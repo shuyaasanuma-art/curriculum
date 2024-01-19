@@ -10,6 +10,7 @@ use App\Post;
 use App\User;
 use App\Spot;
 use App\Like;
+use App\Follow;
 
 class DisplayController extends Controller
 {
@@ -92,6 +93,24 @@ class DisplayController extends Controller
             'post_likes_count' => $post_likes_count,
         ];
         return response()->json($param); //6.JSONデータをjQueryに返す
-}
+    }
+    public function follow($id){
+        $user_id = Auth::user()->id;//ログインユーザーのid取得
+        $followed_user_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得
+        $followCount = count(Follow::where('followed_user_id', $followed_user_id)->get());
+        // $follow = Follow::create([
+        //     'following_user_id'=>Auth::user()->id,
+        //     'followed_user_id'=>$user->id,
+        // ]);
+        // $followCount = count(Follow::where('followed_user_id', $user->id)->get());
+        return response()->json(['followCount' => $followCount]);
+    }
 
+    public function unfollow($id){
+        $follow = Follow::where('following_user_id', Auth::user()->id)->where('followed_user_id', $user->id)->first();
+        $follow->delete();
+        $followCount = count(Follow::where('followed_user_id', $user->id)->get());
+
+        return response()->json(['followCount' => $followCount]);
+    }
 }

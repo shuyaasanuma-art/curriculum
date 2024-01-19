@@ -32,11 +32,9 @@ Route::group(['middleware'=>'auth'],function(){
    Route::resource('spots','SpotController')->only([
     'store','destroy','edit','show','update'
    ]);
-//    Route::post('/like/{postId}',[LikeController::class,'store']);
-//    Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
-   //「ajaxlike.jsファイルのurl:'ルーティング'」に書くものと合わせる。
-//    Route::post('ajaxlike', 'PostController@ajaxlike')->name('posts.ajaxlike');
 Route::post('/like', 'DisplayController@like')->name('posts.like');
+Route::post('/users/{id}/follow','DisplayController@follow');
+Route::post('/users/{id}/unfollow','DisplayController@unfollow');
 
 });
 

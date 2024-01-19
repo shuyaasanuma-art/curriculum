@@ -29,6 +29,15 @@
                 <div class="col"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
                 <div class="col"><h4>{{$posts->user->name}}</h4></div>
                 <div class="col">いいね数{{$posts->likes_count}}</div>
+                <div class="col">
+                    <span class="float-center">
+                        @if(Auth::user())
+                        <button class="btn-sm shadow-none border border-primary p-2" onclick="follow(userId)">フォロー</button>
+                        @else
+                        <button class="btn-sm shadow-none border border-primary p-2 bg-primary text-white" onclick="unfollow(userId)">フォロー中</button>
+                        @endif
+                    </span>
+                </div>
                 <!-- ユーザーと投稿のidが一致した時 -->
                 @if($posts->user_id === Auth::user()->id)
                 <button type="submit">投稿編集</button> 
