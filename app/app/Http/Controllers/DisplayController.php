@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\User;
 use App\Spot;
+use App\Like;
 
 class DisplayController extends Controller
 {

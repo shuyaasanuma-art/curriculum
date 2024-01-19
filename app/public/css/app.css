@@ -6,6 +6,9 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+.liked{
+  fill:red;
+}
 
 :root {
   --blue: #3490dc;
@@ -43,9 +46,7 @@
 *::after {
   box-sizing: border-box;
 }
-.liked {
-  color: pink;
-}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

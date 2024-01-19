@@ -1,9 +1,10 @@
 $(function () {
-    let like = $('.like-toggle'); //like-toggleのついたiタグを取得し代入。
-    let likeReviewId; //変数を宣言（なんでここで？）
+    let like = $('.like-toggle'); //like-toggleのついたタグを取得し代入。
+    let likePostId; //変数を宣言
     like.on('click', function () { //onはイベントハンドラー
-        let $this = $(this); //this=イベントの発火した要素＝iタグを代入
-        likeReviewId = $this.data('post-id'); //iタグに仕込んだdata-post-idの値を取得
+        let $this = $(this); //this=イベントの発火した要素＝タグを代入
+        likePostId = $this.data('post-id'); //タグに仕込んだdata-post-idの値を取得
+        console.log('送れた');
         //ajax処理スタート
         $.ajax({
             headers: { //HTTPヘッダ情報をヘッダ名と値のマップで記述
@@ -12,7 +13,7 @@ $(function () {
             url: '/like', //通信先アドレスで、このURLをあとでルートで設定します
             method: 'POST', //HTTPメソッドの種別を指定します。1.9.0以前の場合はtype:を使用。
             data: { //サーバーに送信するデータ
-                'post_id': likeReviewId //いいねされた投稿のidを送る
+                'post_id': likePostId //いいねされた投稿のidを送る
             },
         })
             //通信成功した時の処理

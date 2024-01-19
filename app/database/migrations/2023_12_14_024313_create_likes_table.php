@@ -19,7 +19,7 @@ class CreateLikesTable extends Migration
                 ->constrained() //userテーブルのidカラムを参照するconstrainedメソッド
                 ->onDelete('cascade'); //削除時のオプション
 
-            $table->foreignId('review_id') //同じことをreviewsテーブルとも
+            $table->foreignId('post_id') //同じことをpostsテーブルとも
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();

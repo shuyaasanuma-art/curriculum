@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
+    <script src="{{ asset('js/like.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -28,11 +29,14 @@
                 @if(Auth::check())
                     <a class="my-navbar-item" href="{{ route('users.index')}}"><img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="50" height="50"></a>
                     /
-                    <a href="{{ route('login')}}" id="logout" class="my-navbar-item">ログアウト</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                       @csrf
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    ログアウト
+                    </a>
+                    <form id='logout-form' action="{{ route('logout')}}" method="POST" style="display: none;">
+                      @csrf
                     </form>
-                    
+
                     <script>
                        document.getElementById('logout').addEventListener('click',function(event) {
                        　　　event.preventDefault();
@@ -40,12 +44,7 @@
                        });
                     </script>
                 @else
-                    <!-- <a class="navbar-item" href="{{ route('users.index')}}">
-                    アイコン
-                    </a>
-                    <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
-                    /
-                    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a> -->
+
                 @endif
             </div>
     </nav>

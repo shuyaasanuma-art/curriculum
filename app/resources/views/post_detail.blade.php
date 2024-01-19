@@ -28,7 +28,7 @@
             <div class="row m-2">
                 <div class="col"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
                 <div class="col"><h4>{{$posts->user->name}}</h4></div>
-                <div class="col">いいね数</div>
+                <div class="col">いいね数{{$posts->likes_count}}</div>
                 <!-- ユーザーと投稿のidが一致した時 -->
                 @if($posts->user_id === Auth::user()->id)
                 <button type="submit">投稿編集</button> 

@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Auth::user()->post()->orderby('created_at','DESC')->paginate(6);
+        $posts = Auth::user()->post()->withCount('likes')->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'users'=>$users,
             'posts'=>$posts,
