@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+    <script src="{{ asset('js/follow.js') }}" defer></script>
     <script src="{{ asset('js/like.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -37,12 +37,7 @@
                       @csrf
                     </form>
 
-                    <script>
-                       document.getElementById('logout').addEventListener('click',function(event) {
-                       　　　event.preventDefault();
-                       　　　document.getElementById('logout-form').submit();    
-                       });
-                    </script>
+                    
                 @else
 
                 @endif

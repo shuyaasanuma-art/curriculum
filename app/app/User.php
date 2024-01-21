@@ -52,4 +52,7 @@ class User extends Authenticatable
     public function follows(){
         return $this->belongsToMany('App\User', 'follows', 'user_id', 'follow_id');
     }
+    public function isFollowedBy($user): bool {
+        return Follow::where('user_id', $user->id)->where('follow_id', $this->id)->first() !==null;
+    }
 }

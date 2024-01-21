@@ -96,20 +96,21 @@ class DisplayController extends Controller
     }
     public function follow($id){
         $user_id = Auth::user()->id;//ログインユーザーのid取得
-        $followed_user_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得
-        $followCount = count(Follow::where('followed_user_id', $followed_user_id)->get());
+        $follow_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得
+        $followCount = count(Follow::where('follow_id', $follow_id)->get());
+        // varidation用
         // $follow = Follow::create([
-        //     'following_user_id'=>Auth::user()->id,
-        //     'followed_user_id'=>$user->id,
+        //     'user_id'=>Auth::user()->id,
+        //     'follow_id'=>$user->id,
         // ]);
-        // $followCount = count(Follow::where('followed_user_id', $user->id)->get());
+        // $followCount = count(Follow::where('follow_id', $user->id)->get());
         return response()->json(['followCount' => $followCount]);
     }
 
     public function unfollow($id){
-        $follow = Follow::where('following_user_id', Auth::user()->id)->where('followed_user_id', $user->id)->first();
+        $follow = Follow::where('user_id', Auth::user()->id)->where('follow_id', $user->id)->first();
         $follow->delete();
-        $followCount = count(Follow::where('followed_user_id', $user->id)->get());
+        $followCount = count(Follow::where('follow_id', $user->id)->get());
 
         return response()->json(['followCount' => $followCount]);
     }

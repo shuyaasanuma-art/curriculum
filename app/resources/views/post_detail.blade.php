@@ -31,12 +31,23 @@
                 <div class="col">いいね数{{$posts->likes_count}}</div>
                 <div class="col">
                     <span class="float-center">
-                        @if(Auth::user())
-                        <button class="btn-sm shadow-none border border-primary p-2" onclick="follow(userId)">フォロー</button>
+                        @if($posts->user_id === Auth::user()->id)
+                        <!-- 自身の投稿 -->
+                        @elseif(!$users->isFollowedBy(Auth::user()))
+                        <span class="btn-sm shadow-none border border-primary p-2" >
+                            <a class="follow" data-user-id="{{ $posts->user->id }}">
+                                フォローする
+                            </a>    
+                        </span>
                         @else
-                        <button class="btn-sm shadow-none border border-primary p-2 bg-primary text-white" onclick="unfollow(userId)">フォロー中</button>
+                        <button class="btn-sm shadow-none border border-primary p-2 bg-primary text-white" onclick="unfollow(userId)">
+                            <a class="unfollow" data-user-id="{{ $posts->user->id}}">
+                                フォロー中
+                            </a>
+                        </button>
                         @endif
                     </span>
+                   
                 </div>
                 <!-- ユーザーと投稿のidが一致した時 -->
                 @if($posts->user_id === Auth::user()->id)
