@@ -43,7 +43,9 @@ class User extends Authenticatable
     public function likes(){
         return $this->hasMany('App\Like');
     }
-
+    public function like_articles(){
+        return $this->belongsToMany(Like::class,'likes','user_id','post_id');
+    }
     // フォロワーの取得
     public function followUsers(){
         return $this->belongsToMany('App\User', 'follows', 'follow_id', 'user_id');

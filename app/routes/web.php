@@ -33,6 +33,7 @@ Route::group(['middleware'=>'auth'],function(){
     'store','destroy','edit','show','update'
    ]);
 Route::post('/like', 'DisplayController@like')->name('posts.like');
+Route::get('/footprint',[DisplayController::class,'likeFoot'])->name('likefoot');
 Route::post('/users/{id}/follow','DisplayController@follow');
 Route::post('/users/{id}/unfollow','DisplayController@unfollow');
 

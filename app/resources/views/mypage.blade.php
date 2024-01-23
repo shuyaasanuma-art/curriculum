@@ -34,9 +34,10 @@
             <a class="col" href="{{route('users.index')}}">
                 <button class="btn btn-lg">自分の投稿一覧</button>
             </a>
-            
             <div class="col"></div>
-            <button class="col btn btn-lg">いいねした投稿一覧</button>
+            <a class="col" href="{{ route('likefoot')}}">
+                <button class="btn btn-lg">いいねした投稿一覧</button>
+            </a>
         </div>
     </div>
     <div class="container">

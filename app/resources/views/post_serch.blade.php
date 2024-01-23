@@ -9,8 +9,15 @@
     <div class="container">
       <form action="{{ route('posts.serch')}}" method="get">
         <div class="row justify-content-around">
-            <input class="btn btn-lg col" value="投稿検索ワード入力">
-            <div class="col"></div>
+            <input class="btn btn-lg col" placeholder="投稿検索ワード入力" name="keyword" value="{{ $keyword}}">
+            <!-- <input class="btn btn-lg col" placeholder="スポット検索" name="spotword" value="{{ $spotword}}"> -->
+            <select name="evolution" >
+              <option value="">評価値</option>
+                 @for($i=5; $i>=1; $i--)
+                    <option value="{{ $i }}" 
+                    @if($evolution == "$i") selected @endif>★ x {{ $i }}</option>
+                 @endfor
+            </select>
             <button type="submit" class="btn btn-primary btn-lg col">探す</button>
         </div>
       </form>
@@ -23,25 +30,12 @@
         @endforeach
     </div>
 </div>
-<div class="container">
- <nav aria-label="Page navigation example">
-  <ul class="pagination row justify-content-center">
-    <li class="page-item">
-      <a class="page-link" href="#!" aria-label="Previous">
-        <span aria-hidden="true">«</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#!">1</a></li>
-    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#!" aria-label="Next">
-        <span aria-hidden="true">»</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
- </nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">{{ $posts->links() }}</div>
+        <div class="col"></div>
+    </div>
+    
 </div>
 </body>

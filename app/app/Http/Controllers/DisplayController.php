@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Post;
 use App\User;
 use App\Spot;
@@ -14,12 +16,32 @@ use App\Follow;
 
 class DisplayController extends Controller
 {
-    public function index(){
-        $posting = new Post;
-        // $posts = $posting->orderby('created_at','DESC')->paginate(6);
-        $posts = $posting->first();
+    public function index(Request $request){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        $keyword = $request->input('keyword');
+        $spotword = $request->input('spotword');
+        $evolution = $request->input('evolution');
+        $serch = Post::query();
+        // $serch = Post::query()->with('spot')->get();
+        // var_dump($serch);
+   
+        if (!empty($keyword)) {
+            $serch->where('title', 'LIKE', "%{$keyword}%");
+        }
+        if (!empty($spotword)) {
+            $serch ->where('name','LIKE',"%{$spotword}%");
+        }
+        if (!empty($evolution)) {
+            $serch ->where('evolution','=',$evolution);
+        }
+        $posts = $serch->withCount('likes')->orderby('created_at','DESC')->paginate(6) ;
         return view('post_serch',[
             'posts'=>$posts,
+            'users'=>$users,
+            'keyword'=>$keyword,
+            'evolution'=>$evolution,
+            'spotword'=>$spotword,
         ]);
     }
     public function PostSpot(){
@@ -94,10 +116,24 @@ class DisplayController extends Controller
         ];
         return response()->json($param); //6.JSONデータをjQueryに返す
     }
+    public function likeFoot(){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        $post = Post::all();
+        // いいねしているもの　likesのuser_id=ログインユーザー likesのpost_id=postsのid
+        // post_idを定義すれば完成
+        $like = Like::where('user_id',Auth::id())->find();
+        $like_post_id = $like->post_id;
+        $posts = Post::withCount('likes')->where('post_id',$like_post_id)->orderby('created_at','DESC')->paginate(6);
+        return view('footprint_list',[
+            'users'=>$users,
+            'posts'=>$posts,
+        ]);
+    }
     public function follow($id){
         $user_id = Auth::user()->id;//ログインユーザーのid取得
         $follow_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得
-        $followCount = count(Follow::where('follow_id', $follow_id)->get());
+        $followCount = count(Follow::where('follow_id','=', $follow_id)->get());
         // varidation用
         // $follow = Follow::create([
         //     'user_id'=>Auth::user()->id,

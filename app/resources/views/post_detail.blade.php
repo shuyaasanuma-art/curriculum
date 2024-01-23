@@ -26,7 +26,7 @@
         </div> 
         <div class="container container-lg border">
             <div class="row m-2">
-                <div class="col"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
+                <div class="col"><img src="{{ Storage::url(optional($posts->user)->image)}}" width="100" height="100"></div>
                 <div class="col"><h4>{{$posts->user->name}}</h4></div>
                 <div class="col">いいね数{{$posts->likes_count}}</div>
                 <div class="col">

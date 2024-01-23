@@ -22,13 +22,10 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // ユーザーIDを定義してそのユーザーIDを引っ張ればいいんじゃぜ
+        // ユーザーIDを定義してそのユーザーIDを引っ張れば
         $user_id = Auth::id();
         // var_dump($user_id);
         $users = Auth::user()->find($user_id);
-        // var_dump($users);
-        $posting = new Post;
-        // $posts = $posting->orderby('created_at','DESC')->paginate(6);
         // withCount('likes')でいいね数を送る
         $posts = Post::withCount('likes')->orderby('created_at','DESC')->paginate(6);
 
