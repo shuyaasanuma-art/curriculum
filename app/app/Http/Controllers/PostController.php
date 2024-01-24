@@ -24,17 +24,12 @@ class PostController extends Controller
     {
         // ユーザーIDを定義してそのユーザーIDを引っ張れば
         $user_id = Auth::id();
-        // var_dump($user_id);
         $users = Auth::user()->find($user_id);
         // withCount('likes')でいいね数を送る
         $posts = Post::withCount('likes')->orderby('created_at','DESC')->paginate(6);
 
-
-
-        $sort = $request->sort;
         return view('main',[
             'posts'=>$posts,
-            'sort'=>$sort,
             'users'=>$users,
         ]);
     }
@@ -108,8 +103,7 @@ class PostController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('user_id',$user_id)->first();
-        // var_dump($posts);
+        $posts = Post::where('id',$id)->first();
         return view('post_edit',[
             'posts'=>$posts,
             'users'=>$users,
@@ -127,17 +121,17 @@ class PostController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('user_id',$user_id)->first();
+        $posts = Post::where('id',$id)->where('user_id',$user_id)->first();
+        
         $posts->title = $request->title;
         $posts->date = $request->date;
         $posts->episode = $request->episode;
         $posts->evolution = $request->evolution;
         $posts->image = $request->image;
-        // var_dump($posts->image);
-        // $dir = 'img';
-        // $img = $request->file('image')->getClientOriginalName();
-        // $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
-        Auth::user()->post()->save($posts);
+
+        
+        // Auth::user()->post()->save($posts);
+        $posts ->save();
         
         return view('post_detail',[
             'users'=>$users,

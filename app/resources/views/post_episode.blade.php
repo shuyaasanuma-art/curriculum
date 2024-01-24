@@ -15,7 +15,7 @@
             <div>{{ $spots->address }}</div>
         </div>
         <div></div>
-        <a href="{{ $spots->url}}">{{ $spots->url}}</a>
+        <a href="{{ $spots->url}}">スポットのURL</a>
     </div>
     <form action="{{ route('posts.store')}}"  method="post"  enctype="multipart/form-data">
     @csrf
@@ -23,10 +23,8 @@
         <div　class="container">
             <h1>エピソード登録</h1>
         </div>
-        <div hidden>{{ $spots->name}}{{ $spots->address}}{{ $spots->url}}
+        <div hidden>
             <input type="text" name="id" id="" value="{{ $spots->id}}">
-            <input type="text" name="address" id="" value="{{ $spots->address}}">
-            <input type="text" name="url" id="" value="{{ $spots->url}}">
         </div>
         <div class="row justify-content-center">
                 <div class="container">

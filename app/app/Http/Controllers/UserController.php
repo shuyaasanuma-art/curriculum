@@ -50,17 +50,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $users = new User;
-        // $users->name = $request->name;
-        // $users->email = $request->email;
-        // $users->password = $request->password;
-        // $users->profile = $request->profile;
-
-        // $users->image = $request->image;
-        // $users->save();
-        // return view('user_edit_conf',[
-        //     'users'=>$users,
-        // ]);
+        // 
     }
 
     /**
@@ -105,9 +95,8 @@ class UserController extends Controller
         $users->password = $request->password;
         $users->profile = $request->profile;
         $users->image = $request->image;
-        // var_dump($users->image);
         $users->save();
-        $posts = Auth::user()->post()->orderby('created_at','DESC')->paginate(6);
+        $posts = Auth::user()->post()->withCount('likes')->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'posts'=>$posts,
             'users'=>$users,

@@ -41,12 +41,13 @@
     </div>
     <div class="container">
         <div class="row">
-            <a href="{{ route('posts.index')}}" class="col ">
-                <button class="btn btn-lg">編集画面に戻る</button>
-            </a>
+            <form action="{{ route('spots.store',$posts->spot->id)}}" class="col">
+                <button class="btn btn-lg">直す！！！編集画面に戻る</button>
+            </form>
+           
             <div class="col"></div>
             <a href="{{ route('users.index')}}" class="col ">
-                <button class="btn btn-lg">投稿する</button>
+                <button class="btn btn-lg">ここで保存に直す！投稿する</button>
             </a>
         </div>  
     </div>

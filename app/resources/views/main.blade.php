@@ -8,9 +8,12 @@
    <br>
     <div class="container">
         <div class="row justify-content-between">
-            <button type="button" class="btn btn-primary btn-lg col">タイムライン</button>
+            <a href="{{ route('posts.index')}}" class="col">
+                <button type="button" class="btn btn-primary btn-lg col">タイムライン</button>
+            </a>
+            
             <div class="col"></div>
-            <a href="{{ route('posts.serch')}}">
+            <a href="{{ route('posts.serch')}}" class="col">
                 <button type="button" class="btn btn-primary btn-lg col">投稿検索</button>
             </a>
             

@@ -28,12 +28,7 @@ class SpotController extends Controller
      */
     public function create()
     {
-        // $spoting = new Spot;
-        // $spots = $spoting->get();
-        // var_dump($spots);
-        // return view('post_spot',[
-        //     'spots'=>$spots,
-        // ]);
+        //
     }
 
     /**
@@ -46,6 +41,7 @@ class SpotController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
+        // モデルのSpotメソッドでDBのテーブルに干渉できるため、モデルのSpotを呼び出している
         $spots = new Spot;
         $spots->name = $request->name;
         $spots->address = $request->address;

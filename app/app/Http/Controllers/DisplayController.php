@@ -24,14 +24,12 @@ class DisplayController extends Controller
         $evolution = $request->input('evolution');
         $serch = Post::query();
         // $serch = Post::query()->with('spot')->get();
-        // var_dump($serch);
-   
         if (!empty($keyword)) {
-            $serch->where('title', 'LIKE', "%{$keyword}%");
+            $serch ->where('title', 'LIKE', "%{$keyword}%");
         }
-        if (!empty($spotword)) {
-            $serch ->where('name','LIKE',"%{$spotword}%");
-        }
+        // if (!empty($spotword)) {
+        //     $serch ->where('name','LIKE',"%{$spotword}%");
+        // }
         if (!empty($evolution)) {
             $serch ->where('evolution','=',$evolution);
         }
@@ -47,7 +45,6 @@ class DisplayController extends Controller
     public function PostSpot(){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        // var_dump($users);
         return view('post_spot',[
             'users'=>$users,
         ]);
@@ -58,7 +55,7 @@ class DisplayController extends Controller
         $posts = Post::where('user_id',$user_id)->first();
         
         
-        $columns = ['title','date','image','episode','evolution'];
+        $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $posts->$column=$request->$column;
         }
@@ -76,10 +73,11 @@ class DisplayController extends Controller
     public function UserCheck(Request $request){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $columns = ['name','email','password','image','profile'];
+        $columns = ['name','email','password','profile'];
         foreach($columns as $column){
             $users->$column = $request->$column;
         }
+        // publicの下に作るファイル
         $dir = 'img';
         $img = $request->file('image')->getClientOriginalName();
         $users->image = $request->file('image')->storeAs('public/' . $dir, $img);
@@ -87,10 +85,10 @@ class DisplayController extends Controller
             'users'=>$users,
         ]);
     }
-    public function PostCheckDestroy(){
+    public function PostCheckDestroy($id){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('user_id',$user_id)->first();
+        $posts = Post::where('user_id',$user_id)->where('id',$id)->first();
         return view('post_delete_conf',[
             'users'=>$users,
             'posts'=>$posts,
@@ -116,13 +114,17 @@ class DisplayController extends Controller
         ];
         return response()->json($param); //6.JSONデータをjQueryに返す
     }
+
+
+
     public function likeFoot(){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $post = Post::all();
         // いいねしているもの　likesのuser_id=ログインユーザー likesのpost_id=postsのid
         // post_idを定義すれば完成
-        $like = Like::where('user_id',Auth::id())->find();
+        $like = Like::where('user_id',Auth::id())->get();
+        var_dump($like);
         $like_post_id = $like->post_id;
         $posts = Post::withCount('likes')->where('post_id',$like_post_id)->orderby('created_at','DESC')->paginate(6);
         return view('footprint_list',[
@@ -130,6 +132,8 @@ class DisplayController extends Controller
             'posts'=>$posts,
         ]);
     }
+
+
     public function follow($id){
         $user_id = Auth::user()->id;//ログインユーザーのid取得
         $follow_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得

@@ -33,6 +33,7 @@
                     <span class="float-center">
                         @if($posts->user_id === Auth::user()->id)
                         <!-- 自身の投稿 -->
+                        
                         @elseif(!$users->isFollowedBy(Auth::user()))
                         <span class="btn-sm shadow-none border border-primary p-2" >
                             <a class="follow" data-user-id="{{ $posts->user->id }}">
@@ -67,7 +68,7 @@
                             <h5 class="col">評価</h5>
                             <h5 class="col-10">{{ $posts->evolution}}</h5>
                         </div>
-                        <h5>{{ $posts->episode}}こおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおお</h5>
+                        <h5>{{ $posts->episode}}</h5>
                     </div>
                     <div class="col">
                         <img src="{{ Storage::url($posts->image)}}" width="100%">
