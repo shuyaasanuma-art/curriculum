@@ -155,24 +155,46 @@ class DisplayController extends Controller
        
         // いいねしているもの　likesのuser_id=ログインユーザー likesのpost_id=postsのid
         // post_idを定義すれば完成  ユーザーテーブルとlikeテーブル->ログインユーザーのいいねテーブルの情報
-        // $like = new Like;
-        // $like = Like::where('user_id',$user_id)->get();//  ログインユーザーがいいねした情報(likeテーブル)
-        $like = Like::select('post_id')->where('user_id',$user_id)->get();
+    
+        // $serch = Post::query();
+        //  ログインユーザーがいいねした情報(likeテーブル)
+        // ログインユーザーがいいねしたレコードのみ出る(post_idを取得したい!!)
+        // $like = Like::select('post_id')->where('user_id',$user_id)->get();
+        // if(!empty($like)){
+        //     $serch -> with('likes')->where('id',$like->post_id)->get();
+        // }
+        
         // $like = Post::with('likes')->where('id','likes:post_id')->first(); 
 
-        var_dump($like);
-        // $like_post_id = $like->first();
-        // var_dump($like_post_id);
+        $post = DB::table('posts')
+             ->join('likes','posts.id','=','likes.post_id')
+             ->where('likes.user_id','=',$user_id)
+             ->get();
+            
+            //  ->withCount('likes')
+            //  ->orderby('created_at','DESC')->paginate(6);
+             
+        
+        var_dump($post);
+        // $like_post_id = $like->post_id;
+ 
 
         //withとかall
 
         //likeテーブルのpost_idとpostテーブルのidが一致するpostテーブルのレコードを取得
-        // $posts = Post::where('user_id',Auth::id())->where('id','likes:post_id')->withCount('likes')->orderby('created_at','DESC')->paginate(6);
+        // $posts = Post::where('user_id',Auth::id())->where('id',$id)->withCount('likes')->orderby('created_at','DESC')->paginate(6);
     
-        // 
-        $posts = Post::with('user:id','user.likes:user_id')->where('id','likes:post_id')->withCount('likes')->orderby('created_at','DESC')->paginate(6);
-        // var_dump($post);
-        // $posts = Post::withCount('likes')->where('id','user.likes:post_id')->orderby('created_at','DESC')->paginate(6); //　ユーザーがいいねしたpostテーブル一覧
+        // $posts = Post::with('likes')
+        // // ->where('id',$like['post_id'])
+        // ->withCount('likes')->orderby('created_at','DESC')->paginate(6);
+        
+        // $posts = Post::with('user:id','user.likes:user_id')
+        // ->where('id','likes:post_id')
+        // ->withCount('likes')
+        // ->orderby('created_at','DESC')->paginate(6);
+
+        // var_dump($posts);
+        $posts = $post::withCount('likes')->orderby('created_at','DESC')->paginate(6); //　ユーザーがいいねしたpostテーブル一覧
         // var_dump($posts);
         return view('footprint_list',[
             'users'=>$users,
