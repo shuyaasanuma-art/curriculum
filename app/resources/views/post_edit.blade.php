@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.check')}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.check',$posts->id)}}" method="post" enctype="multipart/form-data">
     @csrf
         <div  class="container container-lg border">
           <div class="row">
@@ -72,6 +72,15 @@
             <div class="col m-2">
                 <form action="{{ route('posts.checkdestroy',$posts->id)}}" method="post">
                 @csrf
+                    <div hidden>
+                        <input type="text" name="id" value="{{$posts->id}}">
+                        <input type="text" name="title" value="{{$posts->title}}">
+                        <input type="text" name="episode" value="{{$posts->episode}}">
+                        <input type="text" name="evolution" value="{{$posts->evolution}}">
+                        <input type="text" name="image" value="{{$posts->image}}">
+                    </div>
+                    
+                    
                     <button>削除する</button>
                 </form>
             </div>

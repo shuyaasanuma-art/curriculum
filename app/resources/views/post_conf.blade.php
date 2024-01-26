@@ -46,9 +46,19 @@
             </form>
            
             <div class="col"></div>
-            <a href="{{ route('users.index')}}" class="col ">
-                <button class="btn btn-lg">ここで保存に直す！投稿する</button>
-            </a>
+            <form action="{{ route('posts.store')}}" method="post">
+            @csrf
+                <div hidden>
+                    <input type="text" name=spot_id value="{{$posts->spot_id}}">
+                    <input type="text" name="title" value="{{$posts->title}}">
+                    <input type="text" name="date" value="{{$posts->date}}">
+                    <input type="text" name="evolution" value="{{$posts->evolution}}">
+                    <input type="text" name="episode" value="{{$posts->episode}}">
+                    <input type="text" name="image" value="{{$posts->image}}">
+                </div>
+                <button type="submit" class="btn btn-lg">ここで保存に直す！投稿する</button>
+            </form>
+
         </div>  
     </div>
 </div>

@@ -21,9 +21,10 @@ Route::group(['middleware'=>'auth'],function(){
    //投稿検索
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
-   Route::post('/post/check',[DisplayController::class,'PostCheck'])->name('posts.check');
+   Route::post('/post/{id}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');
+   Route::post('/post/{id}/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
    Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
-   Route::post('/post/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
+   Route::post('/post/{id}/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
 
    Route::resources([
     'posts'=>'PostController',

@@ -55,26 +55,21 @@ class PostController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $posts = new Post;
-        $posts->title = $request->title;
-        $posts->date = $request->date;
-        $posts->episode = $request->episode;
-        $posts->evolution = $request->evolution;
-
-        //送信されたファイルの取得
-        $img = $request->file('image');
-        //storage > public > img配下に画像が保存される   
-        $path = $img->store('img','public');
-        $posts->image = $path;
-        $posts->spot_id = $request->id;
+        $columns = ['title','image','date','evolution','episode','spot_id'];
+        foreach($columns as $column){
+            $posts->$column = $request->$column;
+        }
         Auth::user()->post()->save($posts);
+    
+        $posts = Post::withCount('likes')->orderby('created_at','DESC')->paginate(6);
+
         
-        
-        return view('post_conf',[
+        return view('mypage',[
             'posts'=>$posts,
             'users'=>$users,
         ]);
+        // return redirect()->route('users.index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -121,7 +116,7 @@ class PostController extends Controller
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('id',$id)->where('user_id',$user_id)->first();
+        $posts = Post::where('user_id',$user_id)->find($id);
         
         $posts->title = $request->title;
         $posts->date = $request->date;
@@ -129,9 +124,9 @@ class PostController extends Controller
         $posts->evolution = $request->evolution;
         $posts->image = $request->image;
 
+
+        Auth::user()->post()->save($posts);
         
-        // Auth::user()->post()->save($posts);
-        $posts ->save();
         
         return view('post_detail',[
             'users'=>$users,
@@ -147,6 +142,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        // 呼び出せていない直す
         $posts = Post::find($id);
         $posts -> delete();
         return redirect('/');
