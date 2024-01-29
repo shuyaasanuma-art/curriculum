@@ -6,6 +6,7 @@
    <br>
    <br>
    <br>
+
     <div class="container">
         <div class="row justify-content-between">
             <a href="{{ route('posts.index')}}" class="col">

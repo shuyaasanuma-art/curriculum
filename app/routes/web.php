@@ -15,10 +15,15 @@ use App\Http\Controllers\DisplayController;
 //  return view('welcome');
 // });
 Auth::routes();
+Route::group(['middleware' => 'owner_auth'], function () {
+   Route::get('/owner/home', 'Owner\HomeController@index');
+});
 
 Route::group(['middleware'=>'auth'],function(){
    Route::get('/',[PostController::class,'index']);
+   
    //投稿検索
+
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
    Route::post('/post/{id}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');

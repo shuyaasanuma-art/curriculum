@@ -156,26 +156,25 @@ class DisplayController extends Controller
         // いいねしているもの　likesのuser_id=ログインユーザー likesのpost_id=postsのid
         // post_idを定義すれば完成  ユーザーテーブルとlikeテーブル->ログインユーザーのいいねテーブルの情報
     
-        // $serch = Post::query();
         //  ログインユーザーがいいねした情報(likeテーブル)
         // ログインユーザーがいいねしたレコードのみ出る(post_idを取得したい!!)
         // $like = Like::select('post_id')->where('user_id',$user_id)->get();
-        // if(!empty($like)){
-        //     $serch -> with('likes')->where('id',$like->post_id)->get();
-        // }
         
-        // $like = Post::with('likes')->where('id','likes:post_id')->first(); 
-
-        $post = DB::table('posts')
+        $posts = DB::table('posts')
              ->join('likes','posts.id','=','likes.post_id')
              ->where('likes.user_id','=',$user_id)
              ->get();
-            
-            //  ->withCount('likes')
-            //  ->orderby('created_at','DESC')->paginate(6);
+        // いいね数とview川でいいね数といいね一覧の紐付けをする。なぜかuserを絞ると総イイネ数が合わなくなる
+        // $posts = Post::with('likes')
+        //     ->where('posts.id','=','likes.post_id')
+        //     ->where('likes.user_id','=',$user_id)
+        //     ->get();
              
-        
-        var_dump($post);
+        // $likes = Post::withCount('likes')->first();
+        // orderby('created_at','DESC')->paginate(6);
+
+        // var_dump($likes);
+        // var_dump($posts);
         // $like_post_id = $like->post_id;
  
 
@@ -194,11 +193,12 @@ class DisplayController extends Controller
         // ->orderby('created_at','DESC')->paginate(6);
 
         // var_dump($posts);
-        $posts = $post::withCount('likes')->orderby('created_at','DESC')->paginate(6); //　ユーザーがいいねしたpostテーブル一覧
+        // $posts = $post::withCount('likes')->orderby('created_at','DESC')->paginate(6); //　ユーザーがいいねしたpostテーブル一覧
         // var_dump($posts);
         return view('footprint_list',[
             'users'=>$users,
             'posts'=>$posts,
+            // 'likes'=>$likes,
         ]);
     }
 

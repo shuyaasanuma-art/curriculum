@@ -43,14 +43,14 @@
     <div class="container">
     <div class="row row-cols-3">
         @foreach($posts as $post)
-            @include('layouts.layout_post')
+            @include('layouts.layout_post_like')
         @endforeach
     </div>
     </div>
     <div class="container mt-5">
         <div class="row">
             <div class="col"></div>
-            <div class="col">{{ $posts->links() }}</div>
+            <div class="col"></div>
             <div class="col"></div>
         </div>
     </div>

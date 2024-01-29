@@ -37,25 +37,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    
     public function post(){
         return $this->hasMany('App\Post');
     }
-    // public function likes(){
-    //     return $this->hasMany('App\Like');
-    // }
+    public function likes(){
+        return $this->hasMany('App\Like');
+    }
     public function like_articles(){
         return $this->belongsToMany(Like::class,'likes','user_id','post_id');
     }
-    public function likes(){
-        return $this->hasManyThrough(
-            'App\Post',
-            'App\Like',
-            'user_id',
-            'id',
-            null,
-            'post_id'
-        );
-    }
+    
     // フォロワーの取得
     public function followUsers(){
         return $this->belongsToMany('App\User', 'follows', 'follow_id', 'user_id');

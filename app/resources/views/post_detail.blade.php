@@ -19,7 +19,7 @@
                 </div>   
                 <div class="row">
                     <h5>URL:</h5>
-                    <h5><a href="{{$posts->spot->address}}">登録したスポット</a></h5>
+                    <h5><a href="{{$posts->spot->url}}">登録したスポット</a></h5>
                 </div> 
             </div>
         
