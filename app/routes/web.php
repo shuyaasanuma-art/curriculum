@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\Owner\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,11 +16,28 @@ use App\Http\Controllers\DisplayController;
 //  return view('welcome');
 // });
 Auth::routes();
+// 管理者ユーザー
 Route::group(['middleware' => 'owner_auth'], function () {
-   Route::get('/owner/home', 'Owner\HomeController@index');
-});
+   Route::get('/owner/home', 'Owner\HomeController@index')->name('owners.index');
+   Route::get('/owner/user',[HomeController::class,'OwnerUser'])->name('owners.user');
+   Route::get('/owner/user/detail/{id}',[HomeController::class,'OwnerUserDetail'])->name('users.detail');
+   Route::post('/owner/user/del/{id}',[HomeController::class,'OwnerUserDel'])->name('owners.del');
+   Route::get('/owner/user/edit/{id}',[HomeController::class,'OwnerUserForm'])->name('owners.edit');
+   Route::post('/owner/user/edit/{id}',[HomeController::class,'OwnerUserEdit']);
 
+   Route::get('/owner/post',[HomeController::class,'OwnerPost'])->name('owners.post');
+   Route::get('/owner/post/detail/{id}',[HomeController::class,'OwnerPostDetail'])->name('owners.postdetail');
+   Route::post('/owner/post/del/{id}',[HomeController::class,'OwnerPostDel'])->name('owners.postdel');
+   Route::get('/owner/post/edit/{id}',[HomeController::class,'OwnerPostForm'])->name('owners.postedit');
+   Route::post('/owner/post/edit/{id}',[HomeController::class,'OwnerPostEdit']);
+});
+// Route::get('/admin', 'AdminController@index')->name('admin');
+// Route::group(['middleware' => ['auth', 'can:admin_only']], function () {
+//     Route::get('/admin', 'AdminController@index')->name('admin');
+// });
+// 一般ユーザー
 Route::group(['middleware'=>'auth'],function(){
+   
    Route::get('/',[PostController::class,'index']);
    
    //投稿検索

@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image','200');
             $table->string('profile','100');
-            $table->tinyInteger('role')->default(1);
             $table->tinyInteger('del_flg')->default(0);
             $table->rememberToken();
             $table->timestamps();
