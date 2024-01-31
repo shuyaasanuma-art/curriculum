@@ -1,5 +1,4 @@
 @extends('layouts.layout')
-
 @section('content')
 <br>
 <br><br>
@@ -71,4 +70,4 @@
         
     </div>
 </div>
-@endsection
+ @endsection

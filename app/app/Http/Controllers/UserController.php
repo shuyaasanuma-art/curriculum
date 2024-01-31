@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 use App\Follow;
+use App\Http\Requests\CreateUser;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -59,13 +60,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         
-        $users = User::find($id);
+        // $users = User::find($id);
         // var_dump($users);
         return view('user_delete_conf',[
-            'users'=>$users,
+            'users'=>$user,
         ]);
     }
 
@@ -87,19 +88,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateUser $request,User $user)
     {   
-        $users = Auth::user()->find($id);
-        $users->name = $request->name;
-        $users->email = $request->email;
-        $users->password = $request->password;
-        $users->profile = $request->profile;
-        $users->image = $request->image;
-        $users->save();
+        // $users = Auth::user()->find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->profile = $request->profile;
+        $user->image = $request->image;
+        $user->save();
         $posts = Auth::user()->post()->withCount('likes')->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[
             'posts'=>$posts,
-            'users'=>$users,
+            'users'=>$user,
         ]);
     }
 
@@ -109,10 +110,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $users = User::find($id);
-        $users -> delete();
+        // $users = User::find($id);
+        $user -> delete();
         return redirect('/');
     }
 }

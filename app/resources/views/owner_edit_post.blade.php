@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-        <form action="{{ route('owners.postedit',$posts->id)}}"  method="post"  enctype="multipart/form-data">
+        <form action="{{ route('owners.postedit',$post)}}"  method="post"  enctype="multipart/form-data">
     @csrf
     <div class="container container-m">
         <div　class="container">

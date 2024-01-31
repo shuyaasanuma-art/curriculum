@@ -3,8 +3,17 @@
 <div class="container container-m">
     <div>
         <h3 class="text-align-center">アカウント情報編集</h3>
-        <form action="{{ route('users.check',$users->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('users.check',$user}}" method="post" enctype="multipart/form-data">
         @csrf
+        <div class='panel-body'>
+            @if($errors->any())
+                <div class='alert alert-danger'>
+                    @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                    @endforeach
+                </div>
+            @endif
+        </div>
         <div class="container">
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">ユーザー名</label>
@@ -20,7 +29,7 @@
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">パスワード確認</label>
-                <input type="text" name="password" placeholder="パスワード確認入力">
+                <input type="text" name="password_confirmation" placeholder="パスワード確認入力">
             </div>
             <div class="row mb-3">
                 <label for="" class="col-sm-2 col-form-label">画像</label>

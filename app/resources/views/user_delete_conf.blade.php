@@ -3,7 +3,7 @@
 <div class="container container-m">
     <div>
         <h3 class="text-align-center">アカウントを削除してもよろしいですか。</h3>
-        <form action="{{ route('users.destroy',$users->id)}}" method="post">
+        <form action="{{ route('users.destroy',$users)}}" method="post">
         @csrf
         @method('DELETE')
         <div class="container">

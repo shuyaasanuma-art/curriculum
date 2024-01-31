@@ -41,9 +41,9 @@
     </div>
     <div class="container">
         <div class="row">
-            <form action="{{ route('spots.store',$posts->spot->id)}}" class="col">
+            <a href="{{ route('spots.store')}}" class="col">
                 <button class="btn btn-lg">直す！！！編集画面に戻る</button>
-            </form>
+            </a>
            
             <div class="col"></div>
             <form action="{{ route('posts.store')}}" method="post">
@@ -56,7 +56,7 @@
                     <input type="text" name="episode" value="{{$posts->episode}}">
                     <input type="text" name="image" value="{{$posts->image}}">
                 </div>
-                <button type="submit" class="btn btn-lg">ここで保存に直す！投稿する</button>
+                <button type="submit" class="btn btn-lg">投稿する</button>
             </form>
 
         </div>  

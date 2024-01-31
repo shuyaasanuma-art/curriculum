@@ -42,17 +42,17 @@
                     <td>{{$post->title}}</td>
                     <td>{{$post->likes_count}}</td>
                     <td>{{$post->del_flg}}</td>
-                    <td><a href="{{route('owners.postdetail',$post->id)}}">
+                    <td><a href="{{route('owners.postdetail',$post)}}">
                         リンク
                     </a></td>
                     <td>
-                        <form action="{{ route('owners.postdel',$post->id)}}" method="post">
+                        <form action="{{ route('owners.postdel',$post)}}" method="post">
                         @csrf
                             <input hidden type="text" name="keyword" value="{{$keyword}}">
                             <input hidden type="text" name="sort" value="{{$sort}}">
                             <button type="submit">削除</button>
                         </form>
-                        <a href="{{ route('owners.postedit',$post->id)}}">編集</a>
+                        <a href="{{ route('owners.postedit',$post)}}">編集</a>
                     </td>
                 </tr>
                 @endforeach

@@ -9,6 +9,8 @@ use App\Spot;
 use App\User;
 use App\Like;
 
+use App\Http\Requests\CreateData;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Storage;
@@ -50,7 +52,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateData $request)
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
@@ -82,6 +84,9 @@ class PostController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $posts = Post::withCount('likes')->find($id);
+        if (is_null($posts)) {
+            abort(404);
+        }
         return view('post_detail',[
             'posts'=>$posts,
             'users'=>$users,
@@ -99,6 +104,9 @@ class PostController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $posts = Post::where('id',$id)->first();
+        if (is_null($posts)) {
+            abort(404);
+        }
         return view('post_edit',[
             'posts'=>$posts,
             'users'=>$users,
@@ -112,25 +120,21 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateData $request,Post $post)
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('user_id',$user_id)->find($id);
-        
-        $posts->title = $request->title;
-        $posts->date = $request->date;
-        $posts->episode = $request->episode;
-        $posts->evolution = $request->evolution;
-        $posts->image = $request->image;
-
-
-        Auth::user()->post()->save($posts);
-        
-        
+        // エラーハンドリングできていない
+        // $posts = Post::where('user_id',$user_id)->find($id);
+        $columns = ['title','date','episode','evolution','image'];
+        foreach($columns as $column){
+            $post->$column = $request->$column;
+        }
+        // Auth::user()->post()->save($post);
+        $post->save();
         return view('post_detail',[
             'users'=>$users,
-            'posts'=>$posts,
+            'posts'=>$post,
         ]);
     }
 
@@ -140,11 +144,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        // 呼び出せていない直す
-        $posts = Post::find($id);
-        $posts -> delete();
+        $post -> delete();
         return redirect('/');
     }
 }

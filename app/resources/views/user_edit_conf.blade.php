@@ -3,7 +3,7 @@
 <div class="container container-m">
     <div>
         <h3 class="text-align-center">アカウント情報編集内容確認</h3>
-        <form action="{{ route('users.update',$users->id)}}" method="post" >
+        <form action="{{ route('users.update',$user)}}" method="post" >
         @csrf
         @method('PUT')    
         <div hidden>

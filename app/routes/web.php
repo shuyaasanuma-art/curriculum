@@ -20,16 +20,16 @@ Auth::routes();
 Route::group(['middleware' => 'owner_auth'], function () {
    Route::get('/owner/home', 'Owner\HomeController@index')->name('owners.index');
    Route::get('/owner/user',[HomeController::class,'OwnerUser'])->name('owners.user');
-   Route::get('/owner/user/detail/{id}',[HomeController::class,'OwnerUserDetail'])->name('users.detail');
-   Route::post('/owner/user/del/{id}',[HomeController::class,'OwnerUserDel'])->name('owners.del');
-   Route::get('/owner/user/edit/{id}',[HomeController::class,'OwnerUserForm'])->name('owners.edit');
-   Route::post('/owner/user/edit/{id}',[HomeController::class,'OwnerUserEdit']);
+   Route::get('/owner/user/detail/{user}',[HomeController::class,'OwnerUserDetail'])->name('users.detail');
+   Route::post('/owner/user/del/{user}',[HomeController::class,'OwnerUserDel'])->name('owners.del');
+   Route::get('/owner/user/edit/{user}',[HomeController::class,'OwnerUserForm'])->name('owners.edit');
+   Route::post('/owner/user/edit/{user}',[HomeController::class,'OwnerUserEdit']);
 
    Route::get('/owner/post',[HomeController::class,'OwnerPost'])->name('owners.post');
-   Route::get('/owner/post/detail/{id}',[HomeController::class,'OwnerPostDetail'])->name('owners.postdetail');
-   Route::post('/owner/post/del/{id}',[HomeController::class,'OwnerPostDel'])->name('owners.postdel');
-   Route::get('/owner/post/edit/{id}',[HomeController::class,'OwnerPostForm'])->name('owners.postedit');
-   Route::post('/owner/post/edit/{id}',[HomeController::class,'OwnerPostEdit']);
+   Route::get('/owner/post/detail/{post}',[HomeController::class,'OwnerPostDetail'])->name('owners.postdetail');
+   Route::post('/owner/post/del/{post}',[HomeController::class,'OwnerPostDel'])->name('owners.postdel');
+   Route::get('/owner/post/edit/{post}',[HomeController::class,'OwnerPostForm'])->name('owners.postedit');
+   Route::post('/owner/post/edit/{post}',[HomeController::class,'OwnerPostEdit']);
 });
 // Route::get('/admin', 'AdminController@index')->name('admin');
 // Route::group(['middleware' => ['auth', 'can:admin_only']], function () {
@@ -44,10 +44,10 @@ Route::group(['middleware'=>'auth'],function(){
 
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
-   Route::post('/post/{id}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');
-   Route::post('/post/{id}/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
+   Route::post('/post/{post}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');
+   Route::post('/post/{user}/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
    Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
-   Route::post('/post/{id}/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
+   Route::post('/post/{post}/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
 
    Route::resources([
     'posts'=>'PostController',

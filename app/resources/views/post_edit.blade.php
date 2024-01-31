@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.check',$posts->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.check',$posts)}}" method="post" enctype="multipart/form-data">
     @csrf
         <div  class="container container-lg border">
           <div class="row">
@@ -38,6 +38,17 @@
                         <!-- アイコン画像 -->
                 
                         <h4 class="font-weight-bolder">エピソード編集</h4>
+                        <div class="panel-body">
+                            @if($errors->any())
+                                <div class='alert alert-danger'>
+                                    <ul>
+                                    @foreach($errors->all() as $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        </div>
                         <div class="container m-2">
                             <input type="text" name="title" placeholder="{{ $posts->title}}">
                         </div>
@@ -70,7 +81,7 @@
     <div class="container">
         <div class="row">
             <div class="col m-2">
-                <form action="{{ route('posts.checkdestroy',$posts->id)}}" method="post">
+                <form action="{{ route('posts.checkdestroy',$posts)}}" method="post">
                 @csrf
                     <div hidden>
                         <input type="text" name="id" value="{{$posts->id}}">

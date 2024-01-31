@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.destroy',$posts->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.destroy',$posts)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('DELETE')
     <div class="container container-lg row">

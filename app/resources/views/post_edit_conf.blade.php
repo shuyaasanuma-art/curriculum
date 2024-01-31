@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.update',$posts->id)}}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.update',$posts)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
         <div  class="container container-lg border">

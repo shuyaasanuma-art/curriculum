@@ -13,6 +13,15 @@
         <div>
             <h1 class="text justify-content-center">スポット編集</h1>
         </div>
+        <div class='panel-body'>
+   @if($errors->any())
+   <div class='alert alert-danger'>
+      @foreach($errors->all() as $message)
+      <li>{{ $message }}</li>
+      @endforeach
+   </div>
+   @endif
+</div>
         <div class="row">
             <form action="{{ route('spots.update',$spots->id)}}" method="post">
                 @csrf

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Spot;
 use App\Post;
 
+use App\Http\Requests\CreateSpot;
+
 class SpotController extends Controller
 {
     /**
@@ -37,7 +39,7 @@ class SpotController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSpot $request)
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
@@ -79,6 +81,9 @@ class SpotController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $spots = Spot::find($id);
+        if (is_null($spots)) {
+            abort(404);
+        }
         return view('post_edit_spot',[
             'spots'=>$spots,
             'users'=>$users,
@@ -92,8 +97,11 @@ class SpotController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateSpot $request, $id)
     {
+        if (is_null($spots)) {
+            abort(404);
+        }
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $spots = Spot::find($id);
@@ -104,6 +112,7 @@ class SpotController extends Controller
             $spots->$column = $request->$column;
         }
         $spots -> save();
+        
         
         return view('post_edit',[
             'spots'=>$spots,
@@ -120,8 +129,6 @@ class SpotController extends Controller
      */
     public function destroy($id)
     {
-        $spots = Spot::find($id);
-        $spots -> delete();
-        return redirect('my_post');
+        //
     }
 }

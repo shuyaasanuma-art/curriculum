@@ -2,7 +2,7 @@
 <br><br><br>
 <div>
     <div>
-    <form action="{{ route('posts.edit',$posts->id)}}" method="get">
+    <form action="{{ route('posts.edit',$posts)}}" method="get">
     @csrf
         <div  class="container container-lg border">
             <div class="m-5">

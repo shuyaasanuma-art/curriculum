@@ -17,11 +17,22 @@
         <div></div>
         <a href="{{ $spots->url}}">スポットのURL</a>
     </div>
-    <form action="{{ route('posts.checkstore',$users->id)}}"  method="post"  enctype="multipart/form-data">
+    <form action="{{ route('posts.checkstore',$user)}}"  method="post"  enctype="multipart/form-data">
     @csrf
     <div class="container container-m">
         <div　class="container">
             <h1>エピソード登録</h1>
+        </div>
+        <div class="panel-body">
+            @if($errors->any())
+               <div class='alert alert-danger'>
+                    <ul>
+                    @foreach($errors->all() as $message)
+                        <li>{{ $message }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         <div hidden>
             <input type="text" name="id" id="" value="{{ $spots->id}}">

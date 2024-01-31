@@ -13,6 +13,8 @@ use App\User;
 use App\Spot;
 use App\Like;
 use App\Follow;
+use App\Http\Requests\CreateData;
+use App\Http\Requests\CreateUser;
 
 class DisplayController extends Controller
 {
@@ -49,15 +51,13 @@ class DisplayController extends Controller
             'users'=>$users,
         ]);
     }
-    // 新規投稿前の確認画面
-    public function PostCheckStore(Request $request,$id){
-        $user_id = Auth::id();
-        $users = Auth::user()->find($user_id);
+    // 新規投稿前の確認画面 エラーハンドリングまだ
+    public function PostCheckStore(CreateData $request,User $user){
         $posts = new Post;
-        $posts->title = $request->title;
-        $posts->date = $request->date;
-        $posts->episode = $request->episode;
-        $posts->evolution = $request->evolution;
+        $columns = ['title','date','episode','evolution'];
+        foreach($columns as $column){
+            $posts->$column = $request->$column;
+        }
 
         //送信されたファイルの取得
         $img = $request->file('image');
@@ -67,32 +67,30 @@ class DisplayController extends Controller
         $posts->spot_id = $request->id;
         return view('post_conf',[
             'posts'=>$posts,
-            'users'=>$users,
+            'users'=>$user,
         ]);
     }
 
-    public function PostCheck(Request $request,$id){
+    public function PostCheck(CreateData $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        $posts = Post::where('user_id',$user_id)->find($id);
-        
         
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
-            $posts->$column=$request->$column;
+            $post->$column=$request->$column;
         }
         $dir = 'img';
         $img = $request->file('image')->getClientOriginalName();
-        $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
+        $post->image = $request->file('image')->storeAs('public/' . $dir, $img);
         
         return view('post_edit_conf',[
             'users'=>$users,
-            'posts'=>$posts,
+            'posts'=>$post,
         ]);
 
     }
     //次がupdate
-    public function UserCheck(Request $request){
+    public function UserCheck(CreateUser $request){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         $columns = ['name','email','password','profile'];
@@ -109,19 +107,19 @@ class DisplayController extends Controller
     }
 
 
-    // 　　　　　　　　　　　　　　　　　　　　$id呼び出せていない直す
-    public function PostCheckDestroy(Request $request,$id){
+    // errorhand
+    public function PostCheckDestroy(Request $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         
-        $posts = Post::where('user_id',$user_id)->find($id);
+        // $posts = Post::where('user_id',$user_id)->find($id);
         $columns = ['title','evolution','episode','image','date'];
         foreach($columns as $column){
-            $posts->$column = $request->$column;
+            $post->$column = $request->$column;
         }
         return view('post_delete_conf',[
             'users'=>$users,
-            'posts'=>$posts,
+            'posts'=>$post,
         ]);
     }
     public function like(Request $request){
