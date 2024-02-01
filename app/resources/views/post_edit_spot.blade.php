@@ -26,9 +26,9 @@
             <form action="{{ route('spots.update',$spots->id)}}" method="post">
                 @csrf
                 @method('PUT')
-                <input class="col-4" type="text" name="name" placeholder="{{$spots->name}}">
-                <input class="col-4" type="text" name="address" placeholder="{{$spots->address}}">
-                <input class="col-10" type="text" name="url" placeholder="{{$spots->url}}">
+                <input class="col-4" type="text" name="name" placeholder="{{$spots->name}}" value="{{ old('name')}}">
+                <input class="col-4" type="text" name="address" placeholder="{{$spots->address}}" value="{{ old('address')}}">
+                <input class="col-10" type="text" name="url" placeholder="{{$spots->url}}" value="{{ old('url')}}">
                 <input type="submit" name="button" value="再登録">
             </form>
        </div>

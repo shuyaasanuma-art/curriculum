@@ -12,7 +12,7 @@ $(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             //↑name属性がcsrf-tokenのmetaタグのcontent属性の値を取得
-            url: '/users/5/follow',
+            url: '/users/$user/follow',
             //バリデーション時に変更する   通信先アドレスで、このURLをあとでルートで設定します
             method: 'POST',
             //HTTPメソッドの種別を指定します。1.9.0以前の場合はtype:を使用。
@@ -23,8 +23,6 @@ $(function () {
         })
             .done(function (data) {
                 $this.toggleClass('follow');
-                $this.next('.follow-counter').html(data.user_id);
-                console.log('done');
             })
             .fail(function () {
                 console.log('fail');

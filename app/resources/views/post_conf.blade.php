@@ -41,8 +41,8 @@
     </div>
     <div class="container">
         <div class="row">
-            <a href="{{ route('spots.store')}}" class="col">
-                <button class="btn btn-lg">直す！！！編集画面に戻る</button>
+            <a href="{{ route('posts.spot')}}" class="col">
+                <button class="btn btn-lg">戻る</button>
             </a>
            
             <div class="col"></div>

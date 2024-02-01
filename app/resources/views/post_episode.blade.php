@@ -17,7 +17,7 @@
         <div></div>
         <a href="{{ $spots->url}}">スポットのURL</a>
     </div>
-    <form action="{{ route('posts.checkstore',$user)}}"  method="post"  enctype="multipart/form-data">
+    <form action="{{ route('posts.checkstore')}}"  method="POST"  enctype="multipart/form-data">
     @csrf
     <div class="container container-m">
         <div　class="container">
@@ -40,27 +40,27 @@
         <div class="row justify-content-center">
                 <div class="container">
                     <div>タイトル</div>
-                    <input type="text" name="title" id="">
+                    <input type="text" name="title" value="{{ old('title')}}" >
                 </div>
                 <div class="container">
                     <div>日付</div>
-                    <input type="date" name="date" id="">
+                    <input type="date" name="date" value="{{ old('date')}}" >
                 </div>
                 <div class="container">
                     <div>５段階評価登録</div>
-                    <input type="number" min="1" max="5" name="evolution" id="">
+                    <input type="number" min="1" max="5" name="evolution" value="{{ old('evolution')}}" >
                 </div>
                 <div class="container">
                     <div>画像</div>
-                    <input type="file" name="image">
+                    <input type="file" name="image" >
                 </div>
                 <div class="container">
                     <div>コメント</div>
-                    <textarea type="text" name="episode" id=""></textarea>
+                    <textarea type="text" name="episode"></textarea>
                 </div>                
                 <div hidden></div>
             <div class="container">
-                <input type="submit" name="button" class="btn btn-lg" value="投稿内容確認">
+                <button type="submit" name="button" class="btn btn-lg" >投稿内容確認</button>
             </div>
         </div>
     </div>

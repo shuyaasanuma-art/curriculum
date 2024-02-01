@@ -21,9 +21,9 @@
         <div class="row">
             <form action="{{ route('spots.store')}}" method="post">
                 @csrf
-                <input class="col-4" type="text" name="name" placeholder="スキー場の名称">
-                <input class="col-4" type="text" name="address" placeholder="住所">
-                <input class="col-10" type="text" name="url" placeholder="こちらにGoogleMapのurlをペーストしてください">
+                <input class="col-4" type="text" name="name" placeholder="スキー場の名称" value="{{ old('name')}}">
+                <input class="col-4" type="text" name="address" placeholder="住所" value="{{ old('address')}}">
+                <input class="col-10" type="text" name="url" placeholder="こちらにGoogleMapのurlをペーストしてください" value="{{ old('url')}}">
                 <input type="submit" name="button" value="次に進む">
             </form>
        </div>

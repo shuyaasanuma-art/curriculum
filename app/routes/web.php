@@ -45,7 +45,7 @@ Route::group(['middleware'=>'auth'],function(){
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
    Route::post('/post/{post}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');
-   Route::post('/post/{user}/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
+   Route::post('/post/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
    Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
    Route::post('/post/{post}/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
 
@@ -56,10 +56,9 @@ Route::group(['middleware'=>'auth'],function(){
    Route::resource('spots','SpotController')->only([
     'store','destroy','edit','show','update'
    ]);
-Route::post('/like', 'DisplayController@like')->name('posts.like');
-Route::get('/footprint',[DisplayController::class,'likeFoot'])->name('likefoot');
-Route::post('/users/{id}/follow','DisplayController@follow');
-Route::post('/users/{id}/unfollow','DisplayController@unfollow');
+   Route::post('/like', 'DisplayController@like')->name('posts.like');
+   Route::get('/footprint',[DisplayController::class,'likeFoot'])->name('likefoot');
+
 
 });
 

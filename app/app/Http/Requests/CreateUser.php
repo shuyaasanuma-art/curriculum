@@ -25,7 +25,7 @@ class CreateUser extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'email|required|unique:users.email',
+            'email' => 'email|required',
             'password' => 'confirmed:password_confirmation|required|min:8',
             'image' => 'nullable|image',
             'profile' => 'max:100',

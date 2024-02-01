@@ -6,16 +6,14 @@
 <div class="container container-m">
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col">
                 <div class="row">
                     <img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="150" height="150">
-                    <h4>フォロー</h4>
-                    <h4>フォロワー</h4>
                 </div>
-                <div>
-                    <div>{{ optional($users)->name ??''}}</div>
-                    <div placeholder="プロフィール">{{ optional($users)->profile ??''}}</div>
-                </div>
+            </div>
+            <div class="col">
+                <div>{{ optional($users)->name ??''}}</div>
+                <div placeholder="プロフィール">{{ optional($users)->profile ??''}}</div>
             </div>
             <div class="col">
                 <a href="{{ route('posts.spot')}}">

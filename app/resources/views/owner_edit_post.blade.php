@@ -2,11 +2,20 @@
 <br><br><br>
 <div>
     <div>
-        <form action="{{ route('owners.postedit',$post)}}"  method="post"  enctype="multipart/form-data">
+        <form action="{{ route('owners.postedit',$posts)}}"  method="post"  enctype="multipart/form-data">
     @csrf
     <div class="container container-m">
         <div　class="container">
             <h1>エピソード登録</h1>
+        </div>
+        <div class='panel-body'>
+            @if($errors->any())
+                <div class='alert alert-danger'>
+                    @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                    @endforeach
+                </div>
+            @endif
         </div>
         <div hidden>
             

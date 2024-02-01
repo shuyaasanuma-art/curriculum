@@ -88,14 +88,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateUser $request,User $user)
+    public function update(Request $request,User $user)
     {   
         // $users = Auth::user()->find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->profile = $request->profile;
-        $user->image = $request->image;
+        $columns = ['name','email','password','profile','image'];
+        foreach($columns as $column){
+            $user->$column = $request->$column;
+        }
         $user->save();
         $posts = Auth::user()->post()->withCount('likes')->orderby('created_at','DESC')->paginate(6);
         return view('mypage',[

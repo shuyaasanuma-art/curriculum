@@ -88,7 +88,7 @@ class HomeController extends Controller
         ]);
     }
 
-    //  要修正
+
     public function OwnerUserEdit(CreateUser $request,$id){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);

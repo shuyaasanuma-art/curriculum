@@ -12,7 +12,7 @@ use App\Post;
 use App\User;
 use App\Spot;
 use App\Like;
-use App\Follow;
+// use App\Follow;
 use App\Http\Requests\CreateData;
 use App\Http\Requests\CreateUser;
 
@@ -51,14 +51,15 @@ class DisplayController extends Controller
             'users'=>$users,
         ]);
     }
-    // 新規投稿前の確認画面 エラーハンドリングまだ
-    public function PostCheckStore(CreateData $request,User $user){
+    // 新規投稿前の確認画面 
+    public function PostCheckStore(CreateData $request){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = new Post;
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $posts->$column = $request->$column;
         }
-
         //送信されたファイルの取得
         $img = $request->file('image');
         //storage > public > img配下に画像が保存される   
@@ -67,22 +68,29 @@ class DisplayController extends Controller
         $posts->spot_id = $request->id;
         return view('post_conf',[
             'posts'=>$posts,
-            'users'=>$user,
+            'users'=>$users,
         ]);
     }
 
+    // 投稿編集確認に画面遷移
     public function PostCheck(CreateData $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        
+        // if (Auth::user()->id != $post->user_id) {
+        //     abort(404);
+        // }
+        // if (is_null($post)) {
+        //     abort(404);
+        // }
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $post->$column=$request->$column;
         }
+
         $dir = 'img';
         $img = $request->file('image')->getClientOriginalName();
         $post->image = $request->file('image')->storeAs('public/' . $dir, $img);
-        
+
         return view('post_edit_conf',[
             'users'=>$users,
             'posts'=>$post,
@@ -107,7 +115,7 @@ class DisplayController extends Controller
     }
 
 
-    // errorhand
+    // error
     public function PostCheckDestroy(Request $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
@@ -122,6 +130,8 @@ class DisplayController extends Controller
             'posts'=>$post,
         ]);
     }
+
+
     public function like(Request $request){
         $user_id = Auth::user()->id; //1.ログインユーザーのid取得
         $post_id = $request->post_id; //2.投稿idの取得
@@ -202,24 +212,35 @@ class DisplayController extends Controller
 
 
 
-    public function follow($id){
-        $user_id = Auth::user()->id;//ログインユーザーのid取得
-        $follow_id = Post::where('id',$id)->get('user_id');//投稿した人のuser_idの取得
-        $followCount = count(Follow::where('follow_id','=', $follow_id)->get());
-        // varidation用
-        // $follow = Follow::create([
-        //     'user_id'=>Auth::user()->id,
-        //     'follow_id'=>$user->id,
-        // ]);
-        // $followCount = count(Follow::where('follow_id', $user->id)->get());
-        return response()->json(['followCount' => $followCount]);
-    }
+    // public function follow($userId){
+    //     // $user_id = Auth::user()->id;//ログインユーザーのid取得
+    //     //投稿した人のuser_idの取得
+    //     // $followCount = count(Follow::where('follow_id','=', $user)->get());
+    //     Auth::user()->follow()->attach($userId);
+    //     // varidation用
+    //     $follow = Follow::create([
+    //         'user_id'=>Auth::user()->id,
+    //         'follow_id'=>$user->id,
+    //     ]);
+    //     // $followCount = count(Follow::where('follow_id', $user->id)->get());
+    //     return response()->json(['followCount' => $followCount]);
+    // }
 
-    public function unfollow($id){
-        $follow = Follow::where('user_id', Auth::user()->id)->where('follow_id', $user->id)->first();
-        $follow->delete();
-        $followCount = count(Follow::where('follow_id', $user->id)->get());
+    // public function store($user){
+    //     Auth::user()->follows()->attach($user);
+    //     return;
+    // }
 
-        return response()->json(['followCount' => $followCount]);
-    }
+    // public function destroy($user){
+    //     Auth::user()->follows()->detach($user);
+    //     return;
+    // }
+
+//     public function unfollow($id){
+//         $follow = Follow::where('user_id', Auth::user()->id)->where('follow_id', $user->id)->first();
+//         $follow->delete();
+//         $followCount = count(Follow::where('follow_id', $user->id)->get());
+
+//         return response()->json(['followCount' => $followCount]);
+//     }
 }

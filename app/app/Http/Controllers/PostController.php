@@ -120,17 +120,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateData $request,Post $post)
+    public function update(Request $request,Post $post)
     {
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        // エラーハンドリングできていない
-        // $posts = Post::where('user_id',$user_id)->find($id);
         $columns = ['title','date','episode','evolution','image'];
         foreach($columns as $column){
             $post->$column = $request->$column;
         }
-        // Auth::user()->post()->save($post);
         $post->save();
         return view('post_detail',[
             'users'=>$users,

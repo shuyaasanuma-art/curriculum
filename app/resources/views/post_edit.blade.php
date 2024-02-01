@@ -50,22 +50,22 @@
                             @endif
                         </div>
                         <div class="container m-2">
-                            <input type="text" name="title" placeholder="{{ $posts->title}}">
+                            <input type="text" name="title" value="{{ old('title')}}" placeholder="{{ $posts->title}}">
                         </div>
                         <div class="container m-2">
-                            <input type="date" name="date">
+                            <input type="date" name="date" value="{{ old('date')}}">
                         </div>
                         <div class="container row m-2">
                             <h5 class="col">評価</h5>
-                            <input class="col" type="number" name="evolution" min="1" max="5" placeholder="{{ $posts->evolution}}">
+                            <input class="col" type="number" name="evolution" min="1" max="5" value="{{ old('evolution')}}" placeholder="{{ $posts->evolution}}">
                             <div class="col-7"></div>
                         </div>
                         <div class="container m-2">
-                            <textarea type="text" name="episode" placeholder="{{ $posts->episode}}"></textarea>
+                            <textarea type="text" name="episode" placeholder="{{ $posts->episode}}" value="{{ old('episode')}}"></textarea>
                         </div>
                     </div>
                     <div class="col">
-                        <input type="file" name="image">
+                        <input type="file" name="image" >
                         <div>以前投稿した写真⇩</div>
                         <img src="{{ Storage::url($posts->image)}}" width="300"　height="300">
                     </div>
