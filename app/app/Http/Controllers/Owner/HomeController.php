@@ -43,7 +43,7 @@ class HomeController extends Controller
             }
         }
         $allusers = User::all();
-        $allusers = $serch ->withCount('post')->paginate(10);
+        $allusers = $serch ->withCount('post')->paginate(6);
         return view('user_list',[
             'users'=>$users,
             'allusers'=>$allusers,
@@ -70,7 +70,7 @@ class HomeController extends Controller
         $sort = $request->input('sort');
         $user -> del_flg = 1;
         $user ->save();
-        $user = User::withCount('post')->paginate(10);
+        $user = User::withCount('post')->paginate(6);
         return view('user_list',[
             'users'=>$users,
             'allusers'=>$user,
@@ -125,7 +125,7 @@ class HomeController extends Controller
             }
         }
         $posts = Post::all();
-        $posts = $serch->withCount('likes')->paginate(10);
+        $posts = $serch->withCount('likes')->paginate(6);
         return view('post_list',[
             'users'=>$users,
             'posts'=>$posts,
@@ -149,7 +149,7 @@ class HomeController extends Controller
         $sort = $request->input('sort');
         $post -> del_flg = 1;
         $post -> save();
-        $post = Post::withCount('likes')->paginate(10);
+        $post = Post::withCount('likes')->paginate(6);
         return view('post_list',[
             'users'=>$users,
             'posts'=>$post,

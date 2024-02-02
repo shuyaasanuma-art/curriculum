@@ -17,7 +17,7 @@
       @endforeach
    </div>
    @endif
-</div>
+    </div>
         <div class="row">
             <form action="{{ route('spots.store')}}" method="post">
                 @csrf

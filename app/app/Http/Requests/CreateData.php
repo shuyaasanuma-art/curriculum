@@ -26,7 +26,7 @@ class CreateData extends FormRequest
         return [
             'title' => 'required',
             'evolution' => 'required',
-            'episode' => 'max:200',
+            'episode' => 'required|max:200',
             'image' => 'required',
         ];
     }

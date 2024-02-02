@@ -9,7 +9,7 @@
             <div class="col-7">
                 <div class="row">
                     <img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="150" height="150">
-                    <div class="m-2 align-self-center">
+                    <div class="ml-5 align-self-center">
                         <div><h5>{{ optional($users)->name ??''}}</h5></div>
                         <div placeholder="プロフィール" class="align-self-center">{{ optional($users)->profile ??''}}</div>
                     </div>

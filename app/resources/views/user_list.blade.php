@@ -53,6 +53,6 @@
                 @endforeach
             </table>
         </div>
-        <div>{{ $allusers->links()}}</div>
+        <div>{{ $allusers->appends(request()->query())->links()}}</div>
     </div>
 </div>

@@ -1,11 +1,12 @@
 @extends('layouts.layout')
-<br><br><br>
+<br><br><br><br>
 <div class="col-md-5 mx-auto">
-    <div class="card">
-        <h1>管理者ページ</h1>
+  <div class="container container-m">
+    <div class="">
+        <h1 class="text-center">管理者ページ</h1>
         <div class="row">
             <a class="col" href="{{route('owners.user')}}">
-               <button>ユーザー検索</button>
+               <button class="">ユーザー検索</button>
             </a>
             <a class="col"></a>
             <a class="col" href="{{route('owners.post')}}">
@@ -15,4 +16,5 @@
         
   
     </div>
+  </div>
 </div>

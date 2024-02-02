@@ -28,7 +28,7 @@ class PostController extends Controller
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
         // withCount('likes')でいいね数を送る
-        $posts = Post::withCount('likes')->orderby('created_at','DESC')->paginate(6);
+        $posts = Post::withCount('likes')->where('del_flg',0)->orderby('created_at','DESC')->paginate(6);
 
         return view('main',[
             'posts'=>$posts,
@@ -63,7 +63,7 @@ class PostController extends Controller
         }
         Auth::user()->post()->save($posts);
     
-        $posts = Post::withCount('likes')->orderby('created_at','DESC')->paginate(6);
+        $posts = Post::withCount('likes')->where('del_flg',0)->orderby('created_at','DESC')->paginate(6);
 
         
         return view('mypage',[

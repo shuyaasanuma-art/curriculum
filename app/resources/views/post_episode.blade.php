@@ -3,9 +3,15 @@
 
 <div>
     <div class="container container-m">
+    <form action="{{ route('posts.checkstore',$spots->id)}}"  method="post"  enctype="multipart/form-data">
+    @csrf
         <div>
             <h3>スポット情報</h3>
         </div>
+        <div class="row">
+           <div>スポットID:{{$spots->id}}</div>
+           <input type="text" name="id" width="200" placeholder="スポットIDを必ず入力して下さい" value="{{old('id')}}">
+        </div>       
         <div class="row">
             <div class="">名称:</div>
             <div>{{ $spots->name}}</div>
@@ -13,17 +19,21 @@
         <div class="row">
             <div>所在地:</div>
             <div>{{ $spots->address }}</div>
+            
         </div>
         <div></div>
         <a href="{{ $spots->url}}">スポットのURL</a>
+        
     </div>
-    <form action="{{ route('posts.checkstore',$users)}}"  method="post"  enctype="multipart/form-data">
-    @csrf
+   
     <div class="container container-m">
         <div　class="container">
             <h1>エピソード登録</h1>
         </div>
         <div class="panel-body">
+        @if($errors->any())
+           <div class='alert alert-danger'>エラー表示を読み、一度先ほどのページに戻りページを更新してから再度スポットIDの入力をして下さい</div>
+        @endif
             @if($errors->any())
                <div class='alert alert-danger'>
                     <ul>
@@ -34,6 +44,7 @@
                 </div>
             @endif
         </div>
+        
         <div hidden>
             <input type="text" name="id" id="" value="{{ $spots->id}}">
         </div>
@@ -70,5 +81,5 @@
                 <button class="btn btn-lg">スポット登録に戻る</button>
             </a>
     </div>
-
+    
 </div>

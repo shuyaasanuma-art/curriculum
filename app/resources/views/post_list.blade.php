@@ -10,20 +10,16 @@
                 <div class="col">
                     <form action="{{route('owners.post')}}" method="get">
                         <input type="text"　class="" placeholder="検索ワード入力" name="keyword"　value="{{ $keyword}}">
+                        <select name="sort">
+                            <option value="" value="{{$sort}}"></option>
+                            <option value="1">新しい順</option>
+                            <option value="0">古い順</option>
+                        </select>
                         <button type="submit" class="btn btn-primary btn-lg">探す</button>
                     </form>
                 </div>
                 <div class="col"></div>
-                <div class="col row">
-                    <form action="{{route('owners.post')}}" method="get">
-                        <button type="submit">ソート</button>
-                        <select name="sort">
-                            <option value="" value="{{$sort}}">選択後ソートボタンをクリック</option>
-                            <option value="1">新しい順</option>
-                            <option value="0">古い順</option>
-                        </select>
-                    </form>
-                </div>
+                
             </div>
             <table class="table table-bordered">
                 <tr>
@@ -58,6 +54,6 @@
                 @endforeach
             </table>
         </div>
-        <div>{{ $posts->links()}}</div>
+        <div>{{ $posts->appends(request()->query())->links()}}</div>
     </div>
 </div>

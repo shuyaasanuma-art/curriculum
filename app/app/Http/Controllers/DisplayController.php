@@ -15,6 +15,7 @@ use App\Like;
 // use App\Follow;
 use App\Http\Requests\CreateData;
 use App\Http\Requests\CreateUser;
+use App\Http\Requests\CreateSpot;
 
 class DisplayController extends Controller
 {
@@ -35,7 +36,7 @@ class DisplayController extends Controller
         if (!empty($evolution)) {
             $serch ->where('evolution','=',$evolution);
         }
-        $posts = $serch->withCount('likes')->orderby('created_at','DESC')->paginate(6) ;
+        $posts = $serch->withCount('likes')->where('del_flg',0)->orderby('created_at','DESC')->paginate(6) ;
         return view('post_serch',[
             'posts'=>$posts,
             'users'=>$users,
@@ -52,28 +53,26 @@ class DisplayController extends Controller
         ]);
     }
     // 新規投稿前の確認画面 
-    public function PostCheckStoreForm(CreateData $request,User $user){
-        
+    public function PostCheckStoreForm(CreateData $request){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = new Post;
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $posts->$column = $request->$column;
         }
-        // //送信されたファイルの取得
-        // $img = $request->file('image');
-        // //storage > public > img配下に画像が保存される   
-        // $path = $img->store('img','public');
-        // $posts->image = $path;
         $dir = 'img';
         $img = $request->file('image')->getClientOriginalName();
         $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
         $posts->spot_id = $request->id;
         return view('post_episode',[
             'posts'=>$posts,
-            'users'=>$user,
+            'users'=>$users,
         ]);
     }
-    public function PostCheckStore(CreateData $request,User $user){
+    public function PostCheckStore(CreateData $request){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         $posts = new Post;
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
@@ -83,12 +82,40 @@ class DisplayController extends Controller
         $img = $request->file('image')->getClientOriginalName();
         $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
         $posts->spot_id = $request->id;
+        // $posts->spot_id = $request->$spots->id;
         return view('post_conf',[
             'posts'=>$posts,
-            'users'=>$user,
+            'users'=>$users,
         ]);
     }
-    
+
+    // localhost/spotsへのget
+    public function PostCheckForm(Spot $spot,Request $request){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
+        // $spots = Spot::find($id);
+        $value = session()->get('id','default');
+        var_dump($value);
+        return view('post_episode',[
+            'spots'=>$spot,
+            'users'=>$users,
+        ]);
+    }
+    // public function PostCheckSpotForm(CreateSpot $request){
+    //     $user_id = Auth::id();
+    //     $users = Auth::user()->find($user_id);
+    //     // モデルのSpotメソッドでDBのテーブルに干渉できるため、モデルのSpotを呼び出している
+    //     $spots = new Spot;
+    //     $spots->name = $request->name;
+    //     $spots->address = $request->address;
+    //     $spots->url = $request->url;
+    //     $spots->save();
+        
+    //     return view('post_episode',[
+    //         'spots'=>$spots,
+    //         'users'=>$users,
+    //     ]);
+    // }
 
 
     // 投稿編集確認に画面遷移
@@ -142,7 +169,7 @@ class DisplayController extends Controller
 
     
 
-    // error
+
     public function PostCheckDestroy(Request $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);

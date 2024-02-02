@@ -64,10 +64,10 @@ class SpotController extends Controller
      */
     public function show($id)
     {
-        $spots = Spot::find($id);
-        return view('post_detail',[
-            'spots'=>$spots,
-        ]);
+        // $spots = Spot::find($id);
+        // return view('post_detail',[
+        //     'spots'=>$spots,
+        // ]);
     }
 
     /**
