@@ -52,36 +52,53 @@ class DisplayController extends Controller
         ]);
     }
     // 新規投稿前の確認画面 
-    public function PostCheckStore(CreateData $request){
-        $user_id = Auth::id();
-        $users = Auth::user()->find($user_id);
+    public function PostCheckStoreForm(CreateData $request,User $user){
+        
         $posts = new Post;
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $posts->$column = $request->$column;
         }
-        //送信されたファイルの取得
-        $img = $request->file('image');
-        //storage > public > img配下に画像が保存される   
-        $path = $img->store('img','public');
-        $posts->image = $path;
+        // //送信されたファイルの取得
+        // $img = $request->file('image');
+        // //storage > public > img配下に画像が保存される   
+        // $path = $img->store('img','public');
+        // $posts->image = $path;
+        $dir = 'img';
+        $img = $request->file('image')->getClientOriginalName();
+        $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
+        $posts->spot_id = $request->id;
+        return view('post_episode',[
+            'posts'=>$posts,
+            'users'=>$user,
+        ]);
+    }
+    public function PostCheckStore(CreateData $request,User $user){
+        $posts = new Post;
+        $columns = ['title','date','episode','evolution'];
+        foreach($columns as $column){
+            $posts->$column = $request->$column;
+        }
+        $dir = 'img';
+        $img = $request->file('image')->getClientOriginalName();
+        $posts->image = $request->file('image')->storeAs('public/' . $dir, $img);
         $posts->spot_id = $request->id;
         return view('post_conf',[
             'posts'=>$posts,
-            'users'=>$users,
+            'users'=>$user,
         ]);
     }
+    
+
 
     // 投稿編集確認に画面遷移
-    public function PostCheck(CreateData $request,Post $post){
+    public function PostCheck(Post $post,CreateData $request){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        // if (Auth::user()->id != $post->user_id) {
-        //     abort(404);
-        // }
-        // if (is_null($post)) {
-        //     abort(404);
-        // }
+        if ($users->id !== $post->user_id) {
+            echo 'testtesttest';
+            abort(404);
+        }
         $columns = ['title','date','episode','evolution'];
         foreach($columns as $column){
             $post->$column=$request->$column;
@@ -91,6 +108,15 @@ class DisplayController extends Controller
         $img = $request->file('image')->getClientOriginalName();
         $post->image = $request->file('image')->storeAs('public/' . $dir, $img);
 
+        return view('post_edit_conf',[
+            'users'=>$users,
+            'posts'=>$post,
+        ]);
+
+    }
+    public function PostForm(Post $post){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         return view('post_edit_conf',[
             'users'=>$users,
             'posts'=>$post,
@@ -114,17 +140,28 @@ class DisplayController extends Controller
         ]);
     }
 
+    
 
     // error
     public function PostCheckDestroy(Request $request,Post $post){
         $user_id = Auth::id();
         $users = Auth::user()->find($user_id);
-        
+        if (Auth::user()->id !== $post->user_id) {
+            abort(404);
+        }
         // $posts = Post::where('user_id',$user_id)->find($id);
         $columns = ['title','evolution','episode','image','date'];
         foreach($columns as $column){
             $post->$column = $request->$column;
         }
+        return view('post_delete_conf',[
+            'users'=>$users,
+            'posts'=>$post,
+        ]);
+    }
+    public function PostCheckDestroyForm(Post $post){
+        $user_id = Auth::id();
+        $users = Auth::user()->find($user_id);
         return view('post_delete_conf',[
             'users'=>$users,
             'posts'=>$post,
@@ -171,13 +208,13 @@ class DisplayController extends Controller
         $posts = DB::table('posts')
              ->join('likes','posts.id','=','likes.post_id')
              ->where('likes.user_id','=',$user_id)
-             ->get();
+             ->paginate(6);
         // いいね数とview川でいいね数といいね一覧の紐付けをする。なぜかuserを絞ると総イイネ数が合わなくなる
         // $posts = Post::with('likes')
         //     ->where('posts.id','=','likes.post_id')
         //     ->where('likes.user_id','=',$user_id)
         //     ->get();
-             
+        // $posts -> orderby('created_at','DESC')->paginate(6);
         // $likes = Post::withCount('likes')->first();
         // orderby('created_at','DESC')->paginate(6);
 

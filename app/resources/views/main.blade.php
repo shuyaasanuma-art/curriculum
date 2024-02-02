@@ -7,7 +7,7 @@
    <br>
    <br>
 
-    <a class="" href="{{route('owners.index')}}">管理者のみ動きます</a>
+    
     <div class="container">
         <div class="row justify-content-between">
             <a href="{{ route('posts.index')}}" class="col">
@@ -41,5 +41,5 @@
 </div>
 
 
-
+<a class="" href="{{route('owners.index')}}">管理者のみ動きます</a>
 </body>

@@ -5,18 +5,20 @@
     <form action="{{ route('posts.destroy',$posts)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('DELETE')
-    <div class="container container-lg row">
-        <div class="col">
+    <div class="container container-lg">
+      <div class="row">
+        <div class="col-5">
             <h3>こちらの投稿を削除してもよろしいですか？</h3>
         </div>
         <div class="col">
             <button type="submit">削除する</button>
         </div>
         <div class="col">
-            <a href="{{ route('posts.edit',$posts->id)}}">
+            <a href="{{ route('posts.edit',$posts)}}">
                 編集画面に戻る
             </a>
         </div>
+      </div>
     </div>
         <div  class="container container-lg border">
             <div class="m-5">
@@ -40,9 +42,9 @@
         </div> 
         <div class="container container-lg border">
             <div class="row m-2">
-                <div class="col"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
-                <div class="col"><h4>{{$posts->user->name}}</h4></div>
-                <div class="col">いいね数</div>       
+                <div class="col align-self-center"><img src="{{ Storage::url($posts->user->image)}}" width="100" height="100"></div>
+                <div class="col align-self-center"><h4>{{$posts->user->name}}</h4></div>
+                <div class="col align-self-center">いいね数</div>       
             </div>
         </div>
         <div class="container container-lg border">

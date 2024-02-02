@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 <br><br><br>
-<div class="container container-m">
+<div class="container container-lg">
     <div>
         <h3 class="text-align-center">アカウント情報編集</h3>
         <form action="{{ route('users.check')}}" method="post" enctype="multipart/form-data">

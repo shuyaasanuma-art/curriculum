@@ -44,9 +44,12 @@ Route::group(['middleware'=>'auth'],function(){
 
    Route::get('/post/serch',[DisplayController::class,'index'])->name('posts.serch');
    Route::get('/post/spot',[DisplayController::class,'PostSpot'])->name('posts.spot');
+   Route::get('/post/{post}/check/',[DisplayController::class,'PostForm']);
    Route::post('/post/{post}/check/',[DisplayController::class,'PostCheck'])->name('posts.check');
-   Route::post('/post/check/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
+   Route::get('/post/check/{user}/store/',[DisplayController::class,'PostCheckStoreForm']);
+   Route::post('/post/check/{user}/store/',[DisplayController::class,'PostCheckStore'])->name('posts.checkstore');
    Route::post('/user/check',[DisplayController::class,'UserCheck'])->name('users.check');
+   Route::get('/post/{post}/check/destroy',[DisplayController::class,'PostCheckDestroyForm']);
    Route::post('/post/{post}/check/destroy',[DisplayController::class,'PostCheckDestroy'])->name('posts.checkdestroy');
 
    Route::resources([

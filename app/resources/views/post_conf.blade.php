@@ -41,9 +41,15 @@
     </div>
     <div class="container">
         <div class="row">
-            <a href="{{ route('posts.spot')}}" class="col">
-                <button class="btn btn-lg">戻る</button>
-            </a>
+            <form action="{{route('spots.store')}}" method="post">
+            @csrf 
+                <div hidden>
+                    <input type="text" name="name" value="{{$posts->spot->name}}">
+                    <input type="text" name="address" value="{{$posts->spot->address}}">
+                    <input type="text" name="url" value="{{$posts->spot->url}}">   
+                </div>
+                <button type="submit" class="btn btn-lg">編集画面に戻る</button>
+            </form>
            
             <div class="col"></div>
             <form action="{{ route('posts.store')}}" method="post">

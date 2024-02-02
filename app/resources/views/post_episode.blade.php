@@ -17,7 +17,7 @@
         <div></div>
         <a href="{{ $spots->url}}">スポットのURL</a>
     </div>
-    <form action="{{ route('posts.checkstore')}}"  method="POST"  enctype="multipart/form-data">
+    <form action="{{ route('posts.checkstore',$users)}}"  method="post"  enctype="multipart/form-data">
     @csrf
     <div class="container container-m">
         <div　class="container">

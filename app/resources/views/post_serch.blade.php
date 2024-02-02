@@ -33,7 +33,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col"></div>
-        <div class="col">{{ $posts->links() }}</div>
+        <div class="col">{{ $posts->appends(request()->query())->links() }}</div>
         <div class="col"></div>
     </div>
     

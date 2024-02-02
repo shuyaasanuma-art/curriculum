@@ -6,22 +6,22 @@
 <div class="container container-m">
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-7">
                 <div class="row">
                     <img src="{{ Storage::url(optional($users)->image)}}" class="rounded-circle"  width="150" height="150">
+                    <div class="m-2 align-self-center">
+                        <div><h5>{{ optional($users)->name ??''}}</h5></div>
+                        <div placeholder="プロフィール" class="align-self-center">{{ optional($users)->profile ??''}}</div>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div>{{ optional($users)->name ??''}}</div>
-                <div placeholder="プロフィール">{{ optional($users)->profile ??''}}</div>
-            </div>
-            <div class="col">
+            <div class="col align-self-center">
                 <a href="{{ route('posts.spot')}}">
-                    <button type="button" class="btn btn-sm">新規投稿</button>
+                    <button type="button" class="btn "><h4>新規投稿</h4></button>
                 </a>
                 <br>
                 <a href="{{ route('users.create')}}">
-                    <button type="button" class="btn btn-sm">ユーザー情報編集</button>
+                    <button type="button" class="btn "><h4>ユーザー情報編集</h4></button>
                 </a>               
             </div>
         </div>
@@ -29,12 +29,12 @@
     </div>
     <div class="container">
         <div class="row">
-            <a class="col" href="{{route('users.index')}}">
-                <button class="btn btn-lg">自分の投稿一覧</button>
+            <a class="col align-self-center" href="{{route('users.index')}}">
+                <button class="btn btn-lg"><h3>自分の投稿一覧</h3></button>
             </a>
             <div class="col"></div>
-            <a class="col" href="{{ route('likefoot')}}">
-                <button class="btn btn-lg">いいねした投稿一覧</button>
+            <a class="col align-self-center" href="{{ route('likefoot')}}">
+                <button class="btn btn-lg"><h3>いいねした投稿一覧</h3></button>
             </a>
         </div>
     </div>
